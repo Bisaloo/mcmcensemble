@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ensemble Sampler for Affine-Invariant MCMC • MCMCEnsembleSampler</title>
+<title>Ensemble Sampler for Affine-Invariant MCMC • mcmcensemble</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -35,7 +35,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">MCMCEnsembleSampler</a>
+        <a class="navbar-link" href="index.html">mcmcensemble</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0</span>
       </span>
     </div>
@@ -74,9 +74,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="mcmc-ensemble-sampler" class="section level1">
+<div id="mcmcensemble" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#mcmc-ensemble-sampler" class="anchor"></a>MCMC Ensemble Sampler</h1></div>
+<a href="#mcmcensemble" class="anchor"></a>mcmcensemble</h1></div>
 <!-- badges: start -->
 
 <p>This R package provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which allow a faster convergence for badly scaled estimation problems. Two samplers are proposed: the ‘differential.evolution’ sampler from <a href="https://doi.org/10.1007/s11222-008-9104-9">ter Braak and Vrugt (2008)</a> and the ‘stretch’ sampler from <a href="https://doi.org/10.2140/camcos.2010.5.65">Goodman and Weare (2010)</a>.</p>
@@ -85,14 +85,14 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Bisaloo/MCMCEnsembleSampler"</span>)
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Bisaloo/mcmcensemble"</span>)
 </pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">MCMCEnsembleSampler</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/Bisaloo/MCMCEnsembleSampler">mcmcensemble</a></span>)
 
 <span class="co">## a log-pdf to sample from</span>
 <span class="kw">p.log</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">x</span>) {
@@ -218,8 +218,8 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/Bisaloo/MCMCEnsembleSampler/actions"><img src="https://github.com/Bisaloo/MCMCEnsembleSampler/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler?branch=master"><img src="https://codecov.io/gh/Bisaloo/MCMCEnsembleSampler/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/Bisaloo/mcmcensemble/actions"><img src="https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master"><img src="https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 </div>
