@@ -128,16 +128,16 @@ Weare (2010), or a <em>differential evolution jump move</em> similar to Braak an
 Vrugt (2008).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>MCMCEnsemble</span>(
-  <span class='kw'>f</span>,
-  <span class='kw'>lower.inits</span>,
-  <span class='kw'>upper.inits</span>,
-  <span class='kw'>max.iter</span>,
-  n.walkers = <span class='fl'>10</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='kw'>lower.inits</span>),
-  method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"stretch"</span>, <span class='st'>"differential.evolution"</span>),
-  coda = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>MCMCEnsemble</span><span class='op'>(</span>
+  <span class='va'>f</span>,
+  <span class='va'>lower.inits</span>,
+  <span class='va'>upper.inits</span>,
+  <span class='va'>max.iter</span>,
+  n.walkers <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>lower.inits</span><span class='op'>)</span>,
+  method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stretch"</span>, <span class='st'>"differential.evolution"</span><span class='op'>)</span>,
+  coda <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -217,14 +217,16 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## a log-pdf to sample from</span>
-<span class='kw'>p.log</span> <span class='op'>&lt;-</span> <span class='fu'>function</span>(<span class='kw'>x</span>) {
-    <span class='kw'>B</span> <span class='op'>&lt;-</span> <span class='fl'>0.03</span>                              <span class='co'># controls 'bananacity'</span>
-    <span class='op'>-</span><span class='kw'>x</span>[<span class='fl'>1</span>]<span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>200</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>*</span>(<span class='kw'>x</span>[<span class='fl'>2</span>]<span class='op'>+</span><span class='kw'>B</span><span class='op'>*</span><span class='kw'>x</span>[<span class='fl'>1</span>]<span class='op'>^</span><span class='fl'>2</span><span class='op'>-</span><span class='fl'>100</span><span class='op'>*</span><span class='kw'>B</span>)<span class='op'>^</span><span class='fl'>2</span>
-}
+<span class='va'>p.log</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>B</span> <span class='op'>&lt;-</span> <span class='fl'>0.03</span>                              <span class='co'># controls 'bananacity'</span>
+    <span class='op'>-</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>200</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>*</span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>+</span><span class='va'>B</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>-</span><span class='fl'>100</span><span class='op'>*</span><span class='va'>B</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span>
+<span class='op'>}</span>
 
 <span class='co'>## use stretch move</span>
-<span class='kw'>res1</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span>(<span class='kw'>p.log</span>, lower.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>0</span>, b=<span class='fl'>0</span>), upper.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>1</span>, b=<span class='fl'>1</span>),
-                     max.iter=<span class='fl'>3000</span>, n.walkers=<span class='fl'>10</span>, method=<span class='st'>"stretch"</span>)</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='kw'>res1</span>)</div><div class='output co'>#&gt; List of 2
+<span class='va'>res1</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
+                     max.iter<span class='op'>=</span><span class='fl'>3000</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>res1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; List of 2
 #&gt;  $ samples: num [1:10, 1:300, 1:2] 0.0808 0.6008 0.0074 0.4978 0.7329 ...
 #&gt;   ..- attr(*, "dimnames")=List of 3
 #&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
@@ -236,10 +238,12 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt;   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...</div><div class='input'>
 
 <span class='co'>## use stretch move, return samples as 'coda' object</span>
-<span class='kw'>res2</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span>(<span class='kw'>p.log</span>, lower.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>0</span>, b=<span class='fl'>0</span>), upper.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>1</span>, b=<span class='fl'>1</span>),
-                     max.iter=<span class='fl'>3000</span>, n.walkers=<span class='fl'>10</span>, method=<span class='st'>"stretch"</span>,
-                     coda=<span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>res2</span><span class='op'>$</span><span class='kw'>samples</span>)</div><div class='output co'>#&gt; 
+<span class='va'>res2</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
+                     max.iter<span class='op'>=</span><span class='fl'>3000</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span>,
+                     coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res2</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Iterations = 1:300
 #&gt; Thinning interval = 1 
 #&gt; Number of chains = 10 
@@ -257,13 +261,16 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt;      2.5%      25%    50%   75%  97.5%
 #&gt; a -16.925 -7.79595 -2.399 2.870 15.933
 #&gt; b  -6.635 -0.09361  1.593 2.665  4.074
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>res2</span><span class='op'>$</span><span class='kw'>samples</span>)</div><div class='img'><img src='MCMCEnsemble-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res2</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
+</div><div class='img'><img src='MCMCEnsemble-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>## use different evolution move, return samples as 'coda' object</span>
-<span class='kw'>res3</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span>(<span class='kw'>p.log</span>, lower.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>0</span>, b=<span class='fl'>0</span>), upper.inits=<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(a=<span class='fl'>1</span>, b=<span class='fl'>1</span>),
-                     max.iter=<span class='fl'>3000</span>, n.walkers=<span class='fl'>10</span>,
-                     method=<span class='st'>"differential.evolution"</span>, coda=<span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>Using differential.evolution move with 10 walkers.</span></div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='kw'>res3</span><span class='op'>$</span><span class='kw'>samples</span>)</div><div class='output co'>#&gt; 
+<span class='va'>res3</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
+                     max.iter<span class='op'>=</span><span class='fl'>3000</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>,
+                     method<span class='op'>=</span><span class='st'>"differential.evolution"</span>, coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using differential.evolution move with 10 walkers.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res3</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
 #&gt; Iterations = 1:300
 #&gt; Thinning interval = 1 
 #&gt; Number of chains = 10 
@@ -281,7 +288,9 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt;      2.5%    25%     50%   75%  97.5%
 #&gt; a -16.313 -6.333 -0.2328 6.032 15.632
 #&gt; b  -6.327 -0.628  1.4085 2.521  4.127
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>res3</span><span class='op'>$</span><span class='kw'>samples</span>)</div><div class='img'><img src='MCMCEnsemble-2.png' alt='' width='700' height='433' /></div><div class='input'></div></pre>
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res3</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
+</div><div class='img'><img src='MCMCEnsemble-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -297,7 +306,7 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
