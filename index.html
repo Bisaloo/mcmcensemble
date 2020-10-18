@@ -147,9 +147,8 @@
 <span class="co">#&gt; a -20.18 -6.6065 0.01745 5.148 17.65</span>
 <span class="co">#&gt; b -10.22 -0.9395 1.25350 2.573  4.29</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-example-stretch-1.svg" width="100%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-
 <span class="co">## use different evolution move, return samples as 'coda' object</span>
 <span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, lower.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">0</span>, b<span class="op">=</span><span class="fl">0</span><span class="op">)</span>, upper.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">1</span>, b<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
                      max.iter<span class="op">=</span><span class="fl">3000</span>, n.walkers<span class="op">=</span><span class="fl">10</span>, 
@@ -176,7 +175,7 @@
 <span class="co">#&gt; a -14.947 -6.59386 -1.001 5.112 16.622</span>
 <span class="co">#&gt; b  -5.064 -0.08247  1.645 2.747  4.148</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-2.svg" width="100%"></p>
+<p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
 </div>
 <div id="similar-projects" class="section level2">
 <h2 class="hasAnchor">
