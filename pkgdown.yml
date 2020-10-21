@@ -2,5 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2020-10-18T09:06Z
+last_built: 2020-10-21T13:08Z
+urls:
+  reference: https://bisaloo.github.io/mcmcensemble//reference
+  article: https://bisaloo.github.io/mcmcensemble//articles
 
