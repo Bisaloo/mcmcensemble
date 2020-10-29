@@ -81,6 +81,7 @@
 <!-- badges: start -->
 
 <p>This R package provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which allow a faster convergence for badly scaled estimation problems. Two samplers are proposed: the ‘differential.evolution’ sampler from <a href="https://doi.org/10.1007/s11222-008-9104-9">ter Braak and Vrugt (2008)</a> and the ‘stretch’ sampler from <a href="https://doi.org/10.2140/camcos.2010.5.65">Goodman and Weare (2010)</a>.</p>
+<p>For theoretical background about Ensemble MCMC (what are the benefits over simple MCMC? How do they work? What are the pitfalls?), please refer for example to <a href="https://astrostatistics.psu.edu/su14/lectures/HierarchicalBayesianModelingEnsembleMCMC.pdf">this lecture</a> from Eric B. Ford (Penn State).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -176,6 +177,14 @@
 <span class="co">#&gt; b -11.49 -0.7183  1.408 2.651  4.198</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></pre></div>
 <p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
+</div>
+<div id="parallel-processing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#parallel-processing" class="anchor"></a>Parallel processing</h2>
+<p>This package is set up to allow transparent parallel processing when requested by the user thanks to the framework provided by the <a href="https://cran.r-project.org/package=future">future</a> package. To enable parallel processing, you must run:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></pre></div>
+<p>at the start of your session.</p>
 </div>
 <div id="similar-projects" class="section level2">
 <h2 class="hasAnchor">
