@@ -86,18 +86,18 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the stable version of this package from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span><span class="op">)</span></code></pre></div>
 <p>or the development version from GitHub:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Bisaloo/mcmcensemble"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"Bisaloo/mcmcensemble"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span>
 
 <span class="co">## a log-pdf to sample from</span>
 <span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -120,10 +120,10 @@
 <span class="co">#&gt;  $ log.p  : num [1:10, 1:300] -3.59 -3.48 -2.41 -3.44 -2.44 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
 <span class="co">#&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
-<span class="co">#&gt;   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...</span></pre></div>
+<span class="co">#&gt;   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...</span></code></pre></div>
 <p>If the <a href="https://cran.r-project.org/package=coda">coda</a> package is installed, you can then use the <code>coda = TRUE</code> argument to get objects of class <code>mcmc.list</code>. The coda package then allows you to call <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to get informative and nicely formatted results and plots:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">## use stretch move, return samples as 'coda' object</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## use stretch move, return samples as 'coda' object</span>
 <span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, lower.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">0</span>, b<span class="op">=</span><span class="fl">0</span><span class="op">)</span>, upper.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">1</span>, b<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
                      max.iter<span class="op">=</span><span class="fl">3000</span>, n.walkers<span class="op">=</span><span class="fl">10</span>, method<span class="op">=</span><span class="st">"stretch"</span>, coda<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
@@ -147,10 +147,10 @@
 <span class="co">#&gt;      2.5%     25%   50%   75%  97.5%</span>
 <span class="co">#&gt; a -15.741 -5.0626 1.077 7.146 20.463</span>
 <span class="co">#&gt; b  -9.213 -0.7261 1.116 2.425  4.297</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-stretch-1.svg" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co">## use different evolution move, return samples as 'coda' object</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## use different evolution move, return samples as 'coda' object</span>
 <span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, lower.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">0</span>, b<span class="op">=</span><span class="fl">0</span><span class="op">)</span>, upper.inits<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">1</span>, b<span class="op">=</span><span class="fl">1</span><span class="op">)</span>,
                      max.iter<span class="op">=</span><span class="fl">3000</span>, n.walkers<span class="op">=</span><span class="fl">10</span>, 
                      method<span class="op">=</span><span class="st">"differential.evolution"</span>, coda<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
@@ -175,15 +175,15 @@
 <span class="co">#&gt;     2.5%     25%    50%   75%  97.5%</span>
 <span class="co">#&gt; a -19.72 -6.3315 -1.066 6.187 17.223</span>
 <span class="co">#&gt; b -11.49 -0.7183  1.408 2.651  4.198</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
 </div>
 <div id="parallel-processing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parallel-processing" class="anchor"></a>Parallel processing</h2>
 <p>This package is set up to allow transparent parallel processing when requested by the user thanks to the framework provided by the <a href="https://cran.r-project.org/package=future">future</a> package. To enable parallel processing, you must run:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></code></pre></div>
 <p>at the start of your session.</p>
 </div>
 <div id="similar-projects" class="section level2">
