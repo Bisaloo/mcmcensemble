@@ -96,9 +96,9 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span></code></pre></div>
-<div id="can-estimations-go-beyond-lower-inits-and-upper-inits" class="section level1">
-<h1 class="hasAnchor">
-<a href="#can-estimations-go-beyond-lower-inits-and-upper-inits" class="anchor"></a>Can estimations go beyond <code>lower.inits</code> and <code>upper.inits</code>?</h1>
+<div id="can-estimations-go-beyond-lower-inits-and-upper-inits" class="section level2">
+<h2 class="hasAnchor">
+<a href="#can-estimations-go-beyond-lower-inits-and-upper-inits" class="anchor"></a>Can estimations go beyond <code>lower.inits</code> and <code>upper.inits</code>?</h2>
 <p><strong>YES</strong></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## a log-pdf to sample from</span>
@@ -136,12 +136,12 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
 <span class="co">#&gt; a -20.642 -10.134 -2.887 3.098 12.403</span>
-<span class="co">#&gt; b  -9.974  -1.766  1.148 2.675  4.401</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="faq_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
+<span class="co">#&gt; b  -9.974  -1.766  1.148 2.675  4.401</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
   lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
@@ -168,9 +168,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      2.5%    25%     50%   75% 97.5%</span>
 <span class="co">#&gt; a -19.189 -6.265 -0.1711 7.735 18.07</span>
-<span class="co">#&gt; b  -8.556 -1.963  1.2788 2.687  4.34</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="faq_files/figure-html/unnamed-chunk-2-2.png" width="700"></p>
+<span class="co">#&gt; b  -8.556 -1.963  1.2788 2.687  4.34</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
   </div>
 
