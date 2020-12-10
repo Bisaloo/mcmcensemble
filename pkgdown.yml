@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   faq: faq.html
-last_built: 2020-12-10T09:23Z
+last_built: 2020-12-10T10:58Z
 urls:
   reference: https://bisaloo.github.io/mcmcensemble//reference
   article: https://bisaloo.github.io/mcmcensemble//articles
