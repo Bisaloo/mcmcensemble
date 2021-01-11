@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.9000</span>
       </span>
     </div>
 
@@ -128,20 +128,43 @@
       <small>Source: <a href='https://github.com/Bisaloo/mcmcensemble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mcmcensemble-21" class="section level1">
-<h1 class="page-header" data-toc-text="2.1">
-<a href="#mcmcensemble-21" class="anchor"></a>mcmcensemble 2.1<small> Unreleased </small>
+    <div id="mcmcensemble-22" class="section level1">
+<h1 class="page-header" data-toc-text="2.2">
+<a href="#mcmcensemble-22" class="anchor"></a>mcmcensemble 2.2<small> Unreleased </small>
 </h1>
 <div id="major-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
-<li>the ensemble sampling can now be parallelized with the future framework. Check the <a href="https://bisaloo.github.io/mcmcensemble/">README</a> for more information</li>
+<li>it is now possible to use a named vector as first argument of the function passed in <code>f</code>. This is useful if you do something like:</li>
 </ul>
+<pre><code>p.log.named &lt;- function(x) {
+  B &lt;- 0.03
+  return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
+}</code></pre>
 </div>
 <div id="other-user-facing-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-user-facing-changes" class="anchor"></a>Other user-facing changes</h2>
+<ul>
+<li>there is now an additional argument check ensuring that <code>lower.inits</code> and <code>upper.inits</code> have the same names</li>
+</ul>
+</div>
+</div>
+    <div id="mcmcensemble-21" class="section level1">
+<h1 class="page-header" data-toc-text="2.1">
+<a href="#mcmcensemble-21" class="anchor"></a>mcmcensemble 2.1<small> 2021-01-07 </small>
+</h1>
+<div id="major-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
+<ul>
+<li>the ensemble sampling can now be parallelised with the future framework. Check the <a href="https://bisaloo.github.io/mcmcensemble/">README</a> for more information</li>
+</ul>
+</div>
+<div id="other-user-facing-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-user-facing-changes-1" class="anchor"></a>Other user-facing changes</h2>
 <ul>
 <li>very large log.p differences between chains do not cause them to be stuck any more</li>
 <li>addition of a new vignette listing frequently asked questions (with their answer)</li>
@@ -168,9 +191,9 @@
 </li>
 </ul>
 </div>
-<div id="other-user-facing-changes-1" class="section level2">
+<div id="other-user-facing-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-user-facing-changes-1" class="anchor"></a>Other user-facing changes</h2>
+<a href="#other-user-facing-changes-2" class="anchor"></a>Other user-facing changes</h2>
 <ul>
 <li>coda package is now only in <code>Suggests</code>, instead of being a hard dependency</li>
 </ul>
