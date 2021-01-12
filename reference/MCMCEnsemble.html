@@ -77,7 +77,7 @@ Vrugt (2008)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.9000</span>
       </span>
     </div>
 
@@ -197,21 +197,17 @@ object? (defaults to <code>FALSE</code>)</p></td>
 
     
 <ul>
-<li><p>if <code>coda = FALSE</code> a list with:</p></li>
-</ul>
-<ul>
-<li><p><em>samples</em>: A three dimensional array of samples with dimensions <code>walker</code> x
-<code>generation</code> x <code>parameter</code></p></li>
+<li><p>if <code>coda = FALSE</code> a list with:</p><ul>
+<li><p><em>samples</em>: A three dimensional array of samples with dimensions <code>walker</code>
+x <code>generation</code> x <code>parameter</code></p></li>
 <li><p><em>log.p</em>: A matrix with the log density evaluate for each walker at each
 generation.</p></li>
-</ul>
-<ul>
-<li><p>if <code>coda = TRUE</code> a list with:</p></li>
-</ul>
-<ul>
+</ul></li>
+<li><p>if <code>coda = TRUE</code> a list with:</p><ul>
 <li><p><em>samples</em>: A object of class <a href='https://rdrr.io/pkg/coda/man/mcmc.list.html'>coda::mcmc.list</a> containing all samples.</p></li>
 <li><p><em>log.p</em>: A matrix with the log density evaluate for each walker at each
 generation.</p></li>
+</ul></li>
 </ul>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
