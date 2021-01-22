@@ -92,7 +92,7 @@
 <a href="#mcmcensemble" class="anchor"></a>mcmcensemble</h1></div>
 <!-- badges: start -->
 
-<p>This R package provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which allow a faster convergence for badly scaled estimation problems. Two samplers are proposed: the ‘differential.evolution’ sampler from <a href="https://doi.org/10.1007/s11222-008-9104-9">ter Braak and Vrugt (2008)</a> and the ‘stretch’ sampler from <a href="https://doi.org/10.2140/camcos.2010.5.65">Goodman and Weare (2010)</a>.</p>
+<p>This R package provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which allow a faster convergence for badly scaled estimation problems. Two samplers are proposed: the ‘differential.evolution’ sampler from <a href="#ref-terBraak2008">ter Braak and Vrugt</a> (<a href="#ref-terBraak2008">2008</a>) and the ‘stretch’ sampler from <a href="#ref-Goodman2010">Goodman and Weare</a> (<a href="#ref-Goodman2010">2010</a>).</p>
 <p>For theoretical background about Ensemble MCMC (what are the benefits over simple MCMC? How do they work? What are the pitfalls?), please refer for example to <a href="https://astrostatistics.psu.edu/su14/lectures/HierarchicalBayesianModelingEnsembleMCMC.pdf">this lecture</a> from Eric B. Ford (Penn State).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -200,10 +200,11 @@
 <div id="similar-projects" class="section level2">
 <h2 class="hasAnchor">
 <a href="#similar-projects" class="anchor"></a>Similar projects</h2>
+<p>The Goodman-Weare ‘stretch’ sampler is also available in the <a href="https://github.com/svdataman/tonic">tonic R package</a>.</p>
 <p>The methods used in this package also have (independent) implementations in other languages:</p>
 <ul>
-<li>emcee in Python (<a href="https://doi.org/10.21105/joss.01864" class="uri">https://doi.org/10.21105/joss.01864</a>)</li>
-<li>gwmcmc in Matlab (<a href="https://github.com/grinsted/gwmcmc" class="uri">https://github.com/grinsted/gwmcmc</a>)</li>
+<li><a href="https://doi.org/10.21105/joss.01864">emcee v3: A Python ensemble sampling toolkit for affine-invariant MCMC</a></li>
+<li><a href="https://github.com/grinsted/gwmcmc">GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in Matlab</a></li>
 </ul>
 </div>
 <div id="who-is-talking-about-this-package" class="section level2">
@@ -212,6 +213,18 @@
 <ul>
 <li><a href="https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/">R View from October 2020</a></li>
 </ul>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-terBraak2008" class="csl-entry">
+<p>Braak, Cajo J. F. ter, and Jasper A. Vrugt. 2008. “Differential Evolution Markov Chain with Snooker Updater and Fewer Chains.” <em>Statistics and Computing</em> 18 (4): 435–46. <a href="https://doi.org/10.1007/s11222-008-9104-9" class="uri">https://doi.org/10.1007/s11222-008-9104-9</a>.</p>
+</div>
+<div id="ref-Goodman2010" class="csl-entry">
+<p>Goodman, Jonathan, and Jonathan Weare. 2010. “Ensemble Samplers with Affine Invariance.” <em>Communications in Applied Mathematics and Computational Science</em> 5 (1): 65–80. <a href="https://doi.org/10.2140/camcos.2010.5.65" class="uri">https://doi.org/10.2140/camcos.2010.5.65</a>.</p>
+</div>
+</div>
 </div>
 </div>
   </div>
