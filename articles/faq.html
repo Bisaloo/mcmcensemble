@@ -172,6 +172,54 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
+<div id="how-to-restrict-the-possible-parameter-range" class="section level2">
+<h2 class="hasAnchor">
+<a href="#how-to-restrict-the-possible-parameter-range" class="anchor"></a>How to restrict the possible parameter range?</h2>
+<p>There is no built-in way to define hard limits for the parameter and make sure they never go outside of this range.</p>
+<p>The recommended way to address this issue is to handle these cases in the function <code>f</code> you provide.</p>
+<p>For example, to keep parameters in the 0-1 range:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">p.log.restricted</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
+  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
+<span class="op">}</span>
+
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
+  <span class="va">p.log.restricted</span>,
+  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
+  method <span class="op">=</span> <span class="st">"stretch"</span>,
+  coda <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span>
+<span class="co">#&gt; Using stretch move with 10 walkers.</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Iterations = 1:300</span>
+<span class="co">#&gt; Thinning interval = 1 </span>
+<span class="co">#&gt; Number of chains = 10 </span>
+<span class="co">#&gt; Sample size per chain = 300 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
+<span class="co">#&gt;    plus standard error of the mean:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a 0.4672 0.2734 0.004991        0.03011</span>
+<span class="co">#&gt; b 0.6363 0.2702 0.004933        0.02835</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; 2. Quantiles for each variable:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span>
+<span class="co">#&gt; a 0.02576 0.2492 0.4503 0.6889 0.9588</span>
+<span class="co">#&gt; b 0.08348 0.4246 0.6867 0.8761 0.9877</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="faq_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
