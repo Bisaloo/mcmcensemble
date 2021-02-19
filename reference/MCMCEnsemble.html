@@ -180,7 +180,8 @@ initial distribution.</p></td>
     <tr>
       <th>method</th>
       <td><p>method for proposal generation, either <code>"stretch"</code>, or
-<code>"differential.evolution"</code>.</p></td>
+<code>"differential.evolution"</code>. This argument will be saved as an attribute
+in the output (see examples).</p></td>
     </tr>
     <tr>
       <th>coda</th>
@@ -210,6 +211,9 @@ generation.</p></li>
 </ul></li>
 </ul>
 
+<p>In both cases, there is an additional attribute (accessible via
+<code><a href='https://rdrr.io/r/base/attr.html'>attr(res, "ensemble.sampler")</a></code>) recording which ensemble sampling algorithm
+was used.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     
@@ -233,7 +237,10 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 <span class='co'>## use stretch move</span>
 <span class='va'>res1</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
                      max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>res1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res1</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "stretch"</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>res1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 2
 #&gt;  $ samples: num [1:10, 1:30, 1:2] 0.0808 0.6008 0.0074 0.4978 0.7329 ...
 #&gt;   ..- attr(*, "dimnames")=List of 3
@@ -243,13 +250,16 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt;  $ log.p  : num [1:10, 1:30] -2.34 -4.01 -3.21 -3.65 -2.45 ...
 #&gt;   ..- attr(*, "dimnames")=List of 2
 #&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
-#&gt;   .. ..$ : chr [1:30] "generation_1" "generation_2" "generation_3" "generation_4" ...</div><div class='input'>
+#&gt;   .. ..$ : chr [1:30] "generation_1" "generation_2" "generation_3" "generation_4" ...
+#&gt;  - attr(*, "ensemble.sampler")= chr "stretch"</div><div class='input'>
 
 <span class='co'>## use stretch move, return samples as 'coda' object</span>
 <span class='va'>res2</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
                      max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span>,
                      coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res2</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "stretch"</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res2</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Iterations = 1:30
@@ -277,6 +287,8 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
                      max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>,
                      method<span class='op'>=</span><span class='st'>"differential.evolution"</span>, coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Using differential.evolution move with 10 walkers.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res3</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "differential.evolution"</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>res3</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 
 #&gt; Iterations = 1:30
