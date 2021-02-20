@@ -138,10 +138,12 @@
 <ul>
 <li>it is now possible to use a named vector as first argument of the function passed in <code>f</code>. This is useful if you do something like:</li>
 </ul>
-<pre><code>p.log.named &lt;- function(x) {
-  B &lt;- 0.03
-  return(-x["a"]^2/200 - 1/2*(x["b"]+B*x["a"]^2-100*B)^2)
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">p.log.named</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"b"</span><span class="op">]</span><span class="op">+</span><span class="va">B</span><span class="op">*</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">100</span><span class="op">*</span><span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <ul>
 <li>mcmcensemble now explicitly depends on R &gt;= 3.5.0. This was already implicitly the case since 2.1 because of the dependency on the progressr package.</li>
 <li>the ensemble sampling algorithm used by <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code> is now recorded in an additional attribute (accessible via <code><a href="https://rdrr.io/r/base/attr.html">attr(res, "ensemble.sampler")</a></code>).</li>
