@@ -209,11 +209,26 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
 </div>
+<div id="progress-bar" class="section level2">
+<h2 class="hasAnchor">
+<a href="#progress-bar" class="anchor"></a>Progress bar</h2>
+<p>You can choose to enable a progress bar thanks to the <a href="https://cran.r-project.org/package=progressr">progressr</a> package. This can be done by adding the following line to your script before running <code><a href="reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># requires R &gt;= 4.0</span>
+<span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"progress"</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
+  <span class="va">p.log</span>,
+  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, 
+  method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
+<span class="op">)</span></code></pre></div>
+</div>
 <div id="parallel-processing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parallel-processing" class="anchor"></a>Parallel processing</h2>
 <p>This package is set up to allow transparent parallel processing when requested by the user thanks to the framework provided by the <a href="https://cran.r-project.org/package=future">future</a> package. To enable parallel processing, you must run:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></code></pre></div>
 <p>at the start of your session.</p>
 </div>
