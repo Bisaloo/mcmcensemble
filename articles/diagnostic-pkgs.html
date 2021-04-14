@@ -144,27 +144,28 @@
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.4893 7.056   0.1288         0.9304</span>
-<span class="co">#&gt; b 1.4278 2.163   0.0395         0.2442</span>
+<span class="co">#&gt; a 0.1354 7.480  0.13656         0.9164</span>
+<span class="co">#&gt; b 1.2727 2.441  0.04456         0.3315</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -12.706 -4.5634 0.3882 5.442 14.843</span>
-<span class="co">#&gt; b  -4.332  0.4317 1.8881 2.850  4.442</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>You can also use any other function from the coda package, such as <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize()</a></code>:</p>
+<span class="co">#&gt; a -15.840 -4.7854 0.4007 5.145 14.742</span>
+<span class="co">#&gt; b  -5.446  0.3609 1.7723 2.942  4.411</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>You can also use any other function from the coda package, such as <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize()</a></code>:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt;        a        b </span>
-<span class="co">#&gt; 61.84407 99.72822</span></code></pre></div>
+<span class="co">#&gt; 64.60540 96.79686</span></code></pre></div>
 <p>Please report to coda documentation to see the complete list of available functions.</p>
 </div>
 <div id="bayesplot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bayesplot" class="anchor"></a>bayesplot</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/">bayesplot</a></span><span class="op">)</span>
 <span class="co">#&gt; This is bayesplot version 1.8.0</span>
 <span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span>
@@ -172,7 +173,7 @@
 <span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span>
 <span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></code></pre></div>
 <p>As opposed to the previous example, bayesplot is readily compatible with all outputs from <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>, no matter the value you specified for the <code>coda</code> argument:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_nocoda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
   lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
@@ -187,24 +188,24 @@
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span></code></pre></div>
 <p>We can use the various plotting facilities:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Density of log-posterior of each parameter</span>
 <span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html">mcmc_areas</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-9-1.png" width="45%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html">mcmc_areas</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-9-2.png" width="45%"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-1.png" width="45%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html">mcmc_areas</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-2.png" width="45%"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="co"># All the sample points in the parameter space</span>
 <span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-9-3.png" width="45%"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-9-4.png" width="45%"> However, a limited number of functions still only work with <code>coda = TRUE</code>. It is for example the case of <code><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace()</a></code>:</p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-3.png" width="45%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-4.png" width="45%"> However, a limited number of functions still only work with <code>coda = TRUE</code>. It is for example the case of <code><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace()</a></code>:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 </div>
   </div>
 
