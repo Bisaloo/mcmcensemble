@@ -77,7 +77,7 @@ Vrugt (2008)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@ Vrugt (2008)." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+    </li>
+    <li>
       <a href="../articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
     </li>
     <li>
@@ -107,8 +110,22 @@ Vrugt (2008)." />
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="../articles/blog_v3.html">Version 3.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -145,10 +162,9 @@ Vrugt (2008).</p>
 
     <pre class="usage"><span class='fu'>MCMCEnsemble</span><span class='op'>(</span>
   <span class='va'>f</span>,
-  <span class='va'>lower.inits</span>,
-  <span class='va'>upper.inits</span>,
+  <span class='va'>inits</span>,
   <span class='va'>max.iter</span>,
-  n.walkers <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>lower.inits</span><span class='op'>)</span>,
+  n.walkers <span class='op'>=</span> <span class='fl'>10</span> <span class='op'>*</span> <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>inits</span><span class='op'>)</span>,
   method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"stretch"</span>, <span class='st'>"differential.evolution"</span><span class='op'>)</span>,
   coda <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
@@ -163,14 +179,9 @@ Vrugt (2008).</p>
 probability density to sample from.</p></td>
     </tr>
     <tr>
-      <th>lower.inits</th>
-      <td><p>vector specifying for each parameter the lower value the
-initial distribution.</p></td>
-    </tr>
-    <tr>
-      <th>upper.inits</th>
-      <td><p>vector specifying for each parameter the upper value the
-initial distribution.</p></td>
+      <th>inits</th>
+      <td><p>A matrix (or data.frame) containing the starting values for the
+walkers. Each column is a variable to estimate and each row is a walker</p></td>
     </tr>
     <tr>
       <th>max.iter</th>
@@ -237,29 +248,38 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
     <span class='op'>-</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>/</span><span class='fl'>200</span> <span class='op'>-</span> <span class='fl'>1</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>*</span><span class='op'>(</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>+</span><span class='va'>B</span><span class='op'>*</span><span class='va'>x</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>-</span><span class='fl'>100</span><span class='op'>*</span><span class='va'>B</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span>
 <span class='op'>}</span>
 
+<span class='co'>## set options and starting point</span>
+<span class='va'>n_walkers</span> <span class='op'>&lt;-</span> <span class='fl'>10</span>
+<span class='va'>unif_inits</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+  <span class='st'>"a"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n_walkers</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>,
+  <span class='st'>"b"</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n_walkers</span>, <span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>
+<span class='op'>)</span>
+
+
 <span class='co'>## use stretch move</span>
-<span class='va'>res1</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
-                     max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span><span class='op'>)</span>
+<span class='va'>res1</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, inits <span class='op'>=</span> <span class='va'>unif_inits</span>,
+                     max.iter <span class='op'>=</span> <span class='fl'>300</span>, n.walkers <span class='op'>=</span> <span class='va'>n_walkers</span>,
+                     method <span class='op'>=</span> <span class='st'>"stretch"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res1</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "stretch"</div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>res1</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 2
-#&gt;  $ samples: num [1:10, 1:30, 1:2] 0.0808 0.6008 0.0074 0.4978 0.7329 ...
+#&gt;  $ samples: num [1:10, 1:30, 1:2] 0.0808 0.8343 0.6008 0.1572 0.0074 ...
 #&gt;   ..- attr(*, "dimnames")=List of 3
 #&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #&gt;   .. ..$ : chr [1:30] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #&gt;   .. ..$ : chr [1:2] "a" "b"
-#&gt;  $ log.p  : num [1:10, 1:30] -2.34 -4.01 -3.21 -3.65 -2.45 ...
+#&gt;  $ log.p  : num [1:10, 1:30] -2.26 -3.94 -4.37 -3.59 -3.37 ...
 #&gt;   ..- attr(*, "dimnames")=List of 2
 #&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...
 #&gt;   .. ..$ : chr [1:30] "generation_1" "generation_2" "generation_3" "generation_4" ...
 #&gt;  - attr(*, "ensemble.sampler")= chr "stretch"</div><div class='input'>
 
 <span class='co'>## use stretch move, return samples as 'coda' object</span>
-<span class='va'>res2</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
-                     max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>, method<span class='op'>=</span><span class='st'>"stretch"</span>,
-                     coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>res2</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, inits <span class='op'>=</span> <span class='va'>unif_inits</span>,
+                     max.iter <span class='op'>=</span> <span class='fl'>300</span>, n.walkers <span class='op'>=</span> <span class='va'>n_walkers</span>,
+                     method <span class='op'>=</span> <span class='st'>"stretch"</span>, coda <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Using stretch move with 10 walkers.</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res2</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "stretch"</div><div class='input'>
@@ -274,21 +294,21 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt;    plus standard error of the mean:
 #&gt; 
 #&gt;     Mean    SD Naive SE Time-series SE
-#&gt; a 0.4205 1.611  0.09299         0.2533
-#&gt; b 1.9467 1.444  0.08334         0.2066
+#&gt; a 0.5466 5.218  0.30125         0.9696
+#&gt; b 1.1207 1.543  0.08908         0.2469
 #&gt; 
 #&gt; 2. Quantiles for each variable:
 #&gt; 
-#&gt;       2.5%     25%    50%   75% 97.5%
-#&gt; a -2.82891 -0.1953 0.6247 1.073 3.678
-#&gt; b -0.07003  0.7065 1.7927 3.106 4.640
+#&gt;      2.5%     25%    50%   75% 97.5%
+#&gt; a -15.177 -0.5430 0.7329 3.874 8.478
+#&gt; b  -2.513  0.3589 0.7122 2.258 4.629
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res2</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
 </div><div class='img'><img src='MCMCEnsemble-1.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>## use different evolution move, return samples as 'coda' object</span>
-<span class='va'>res3</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, lower.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>0</span>, b<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>, upper.inits<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>a<span class='op'>=</span><span class='fl'>1</span>, b<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>,
-                     max.iter<span class='op'>=</span><span class='fl'>300</span>, n.walkers<span class='op'>=</span><span class='fl'>10</span>,
-                     method<span class='op'>=</span><span class='st'>"differential.evolution"</span>, coda<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='va'>res3</span> <span class='op'>&lt;-</span> <span class='fu'>MCMCEnsemble</span><span class='op'>(</span><span class='va'>p.log</span>, inits <span class='op'>=</span> <span class='va'>unif_inits</span>,
+                     max.iter <span class='op'>=</span> <span class='fl'>300</span>, n.walkers <span class='op'>=</span> <span class='va'>n_walkers</span>,
+                     method <span class='op'>=</span> <span class='st'>"differential.evolution"</span>, coda <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>Using differential.evolution move with 10 walkers.</span></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/attr.html'>attr</a></span><span class='op'>(</span><span class='va'>res3</span>, <span class='st'>"ensemble.sampler"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; [1] "differential.evolution"</div><div class='input'>
@@ -302,15 +322,15 @@ doi: <a href='https://doi.org/10.2140/camcos.2010.5.65'>10.2140/camcos.2010.5.65
 #&gt; 1. Empirical mean and standard deviation for each variable,
 #&gt;    plus standard error of the mean:
 #&gt; 
-#&gt;     Mean    SD Naive SE Time-series SE
-#&gt; a -3.073 6.301   0.3638         0.8828
-#&gt; b  1.239 1.844   0.1065         0.2360
+#&gt;      Mean    SD Naive SE Time-series SE
+#&gt; a -0.3589 6.748   0.3896         1.3254
+#&gt; b  1.2285 2.058   0.1188         0.2857
 #&gt; 
 #&gt; 2. Quantiles for each variable:
 #&gt; 
-#&gt;      2.5%     25%    50%  75% 97.5%
-#&gt; a -15.058 -8.1080 -2.196 2.16 6.695
-#&gt; b  -3.674  0.4079  1.210 2.45 4.092
+#&gt;      2.5%     25%    50%   75%  97.5%
+#&gt; a -18.807 -3.7858 0.7047 4.864 10.361
+#&gt; b  -7.101  0.5754 1.5452 2.362  3.974
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res3</span><span class='op'>$</span><span class='va'>samples</span><span class='op'>)</span>
 </div><div class='img'><img src='MCMCEnsemble-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>

@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -96,6 +96,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+    </li>
+    <li>
       <a href="../articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
     </li>
     <li>
@@ -103,8 +106,22 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="../articles/blog_v3.html">Version 3.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -131,13 +148,20 @@
       <small>Source: <a href='https://github.com/Bisaloo/mcmcensemble/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mcmcensemble-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#mcmcensemble-development-version" class="anchor"></a>mcmcensemble (development version)<small> Unreleased </small>
+    <div id="mcmcensemble-300-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="3.0.0">
+<a href="#mcmcensemble-300-development-version" class="anchor"></a>mcmcensemble 3.0.0 (development version)<small> Unreleased </small>
 </h1>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
-<li>there is a new vignette (<code><a href="../articles/diagnostic-pkgs.html">vignette("diagnostic-pkgs", package = "mcmcensemble")</a></code>) presenting two different options (coda and bayesplot) to plot and evaluate the MCMC chains produced by mcmcensemble</li>
+<li><p>the arguments <code>lower.inits</code> and <code>upper.inits</code> are deprecated in favour of <code>inits</code> which leave more flexibility to the user. Please read the detailed blog post for more background about this change and how to migrate.</p></li>
+<li><p><code>inits</code> can now be a <code>data.frame</code> or a <code>matrix</code></p></li>
+<li><p><code>d.e.mcmc()</code> and <code>s.m.mcmc()</code> are not exported any more. Please use the wrapper <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code> instead.</p></li>
+<li><p>there is a new vignette (<code><a href="../articles/diagnostic-pkgs.html">vignette("diagnostic-pkgs", package = "mcmcensemble")</a></code>) presenting two different options (coda and bayesplot) to plot and evaluate the MCMC chains produced by mcmcensemble</p></li>
 </ul>
+</div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
@@ -151,9 +175,9 @@
 <h1 class="page-header" data-toc-text="2.2.0">
 <a href="#mcmcensemble-220" class="anchor"></a>mcmcensemble 2.2.0<small> 2021-02-20 </small>
 </h1>
-<div id="major-changes" class="section level2">
+<div id="major-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major changes</h2>
+<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
 <ul>
 <li>it is now possible to use a named vector as first argument of the function passed in <code>f</code>. This is useful if you do something like:</li>
 </ul>
@@ -180,9 +204,9 @@
 <h1 class="page-header" data-toc-text="2.1">
 <a href="#mcmcensemble-21" class="anchor"></a>mcmcensemble 2.1<small> 2021-01-07 </small>
 </h1>
-<div id="major-changes-1" class="section level2">
+<div id="major-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
+<a href="#major-changes-2" class="anchor"></a>Major changes</h2>
 <ul>
 <li>the ensemble sampling can now be parallelised with the future framework. Check the <a href="https://bisaloo.github.io/mcmcensemble/">README</a> for more information</li>
 </ul>
@@ -212,7 +236,7 @@
 <h2 class="hasAnchor">
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>The argument names and order in <code><a href="../reference/d.e.mcmc.html">d.e.mcmc()</a></code> and <code><a href="../reference/s.m.mcmc.html">s.m.mcmc()</a></code> now match those of <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>
+<li>The argument names and order in <code>d.e.mcmc()</code> and <code>s.m.mcmc()</code> now match those of <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>
 </li>
 </ul>
 </div>

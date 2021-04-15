@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -60,6 +60,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+    </li>
+    <li>
       <a href="articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
     </li>
     <li>
@@ -67,8 +70,22 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="articles/blog_v3.html">Version 3.0.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -119,13 +136,17 @@
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="op">}</span>
 
+<span class="co">## set options and starting point</span>
+<span class="va">n_walkers</span> <span class="op">&lt;-</span> <span class="fl">10</span>
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  <span class="st">"a"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+  <span class="st">"b"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="op">)</span>
 
 <span class="co">## use stretch move</span>
-<span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>
-<span class="op">)</span>
+<span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
+                     max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="va">n_walkers</span>,
+                     method <span class="op">=</span> <span class="st">"stretch"</span><span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res1</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
@@ -133,24 +154,22 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">res1</span><span class="op">)</span>
 <span class="co">#&gt; List of 2</span>
-<span class="co">#&gt;  $ samples: num [1:10, 1:300, 1:2] 0.42619 0.00133 0.35217 0.69689 0.25303 ...</span>
+<span class="co">#&gt;  $ samples: num [1:10, 1:500, 1:2] 0.42619 0.45413 0.00133 0.59391 0.35217 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 3</span>
 <span class="co">#&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
-<span class="co">#&gt;   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
-<span class="co">#&gt;   .. ..$ : chr [1:2] "a" "b"</span>
-<span class="co">#&gt;  $ log.p  : num [1:10, 1:300] -3.23 -2.89 -2.34 -2.64 -2.76 ...</span>
+<span class="co">#&gt;   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
+<span class="co">#&gt;   .. ..$ : chr [1:2] "para_1" "para_2"</span>
+<span class="co">#&gt;  $ log.p  : num [1:10, 1:500] -2.8 -3.91 -2.68 -2.93 -2.25 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 2</span>
 <span class="co">#&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
-<span class="co">#&gt;   .. ..$ : chr [1:300] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
+<span class="co">#&gt;   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
 <span class="co">#&gt;  - attr(*, "ensemble.sampler")= chr "stretch"</span></code></pre></div>
 <p>If the <a href="https://cran.r-project.org/package=coda">coda</a> package is installed, you can then use the <code>coda = TRUE</code> argument to get objects of class <code>mcmc.list</code>. The coda package then allows you to call <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to get informative and nicely formatted results and plots:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## use stretch move, return samples as 'coda' object</span>
-<span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
+<span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
+                     max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="va">n_walkers</span>,
+                     method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res2</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
@@ -158,33 +177,30 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
+<span class="co">#&gt; Iterations = 1:500</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
 <span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
+<span class="co">#&gt; Sample size per chain = 500 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 2.4952 8.857  0.16171         1.1310</span>
-<span class="co">#&gt; b 0.3038 3.541  0.06464         0.6403</span>
+<span class="co">#&gt;           Mean    SD Naive SE Time-series SE</span>
+<span class="co">#&gt; para_1 -1.9746 8.892  0.12575         1.1049</span>
+<span class="co">#&gt; para_2  0.3599 3.229  0.04566         0.4147</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     2.5%     25%   50%   75%  97.5%</span>
-<span class="co">#&gt; a -12.59 -3.9092 1.323 8.642 21.396</span>
-<span class="co">#&gt; b -11.32 -0.6229 1.257 2.518  4.296</span>
+<span class="co">#&gt;           2.5%     25%    50%   75%  97.5%</span>
+<span class="co">#&gt; para_1 -19.563 -8.1257 -1.429 4.862 13.448</span>
+<span class="co">#&gt; para_2  -8.809 -0.7837  1.199 2.519  4.225</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-stretch-1.svg" width="100%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## use different evolution move, return samples as 'coda' object</span>
-<span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, 
-  method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
+<span class="va">res3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
+                     max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="va">n_walkers</span>,
+                     method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Using differential.evolution move with 10 walkers.</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res3</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
@@ -192,23 +208,23 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
+<span class="co">#&gt; Iterations = 1:500</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
 <span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
+<span class="co">#&gt; Sample size per chain = 500 </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a -2.0589 10.004  0.18265         1.2377</span>
-<span class="co">#&gt; b -0.2129  4.591  0.08382         0.7078</span>
+<span class="co">#&gt;           Mean    SD Naive SE Time-series SE</span>
+<span class="co">#&gt; para_1 -0.7293 9.675  0.13683         0.9148</span>
+<span class="co">#&gt; para_2  0.1894 4.103  0.05802         0.4690</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     2.5%    25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -25.31 -7.775 -2.191 5.152 15.203</span>
-<span class="co">#&gt; b -14.66 -1.436  1.239 2.699  4.141</span>
+<span class="co">#&gt;          2.5%     25%     50%   75% 97.5%</span>
+<span class="co">#&gt; para_1 -23.87 -6.4298 -0.2157 6.038 16.33</span>
+<span class="co">#&gt; para_2 -13.53 -0.8687  1.6170 2.583  4.22</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
 </div>
@@ -220,12 +236,9 @@
 <code class="sourceCode R"><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># requires R &gt;= 4.0</span>
 <span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"progress"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, 
-  method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+<span class="fu">CMCEnsemble</span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
+            max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="va">n_walkers</span>,
+            method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="parallel-processing" class="section level2">
 <h2 class="hasAnchor">

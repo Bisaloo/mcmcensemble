@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+    </li>
+    <li>
       <a href="../articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
     </li>
     <li>
@@ -62,8 +65,22 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="../articles/blog_v3.html">Version 3.0.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -112,7 +129,12 @@
 <span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
-<span class="op">}</span></code></pre></div>
+<span class="op">}</span>
+
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 <div id="coda" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coda" class="anchor"></a>coda</h2>
@@ -123,7 +145,7 @@
 <code class="sourceCode R"><span class="co">## use stretch move, return samples as 'coda' object</span>
 <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span></code></pre></div>
@@ -143,23 +165,23 @@
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.7613 9.088  0.16592          1.087</span>
-<span class="co">#&gt; b 0.3776 2.696  0.04922          0.321</span>
+<span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a  1.7088 10.254  0.18720         1.1741</span>
+<span class="co">#&gt; b -0.4099  4.032  0.07362         0.3533</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -16.021 -5.617 0.5639 8.617 16.231</span>
-<span class="co">#&gt; b  -5.616 -1.198 1.0019 2.445  4.103</span></code></pre></div>
+<span class="co">#&gt;     2.5%    25%    50%   75%  97.5%</span>
+<span class="co">#&gt; a -17.25 -5.973 1.1492 8.376 21.817</span>
+<span class="co">#&gt; b -11.00 -1.725 0.9986 2.253  4.152</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>You can also use any other function from the coda package, such as <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html">effectiveSize</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt;        a        b </span>
-<span class="co">#&gt; 59.50316 71.80651</span></code></pre></div>
+<span class="co">#&gt;         a         b </span>
+<span class="co">#&gt;  59.27473 113.52668</span></code></pre></div>
 <p>Please report to coda documentation to see the complete list of available functions.</p>
 </div>
 <div id="bayesplot" class="section level2">
@@ -176,14 +198,14 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res_nocoda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
 <span class="va">res_coda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span></code></pre></div>
@@ -204,6 +226,11 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html">mcmc_trace</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p>Because bayesplot relies on ggplot and its layer system, you can add extra layers as necessary. For example, a common request is how to display the prior and posterior density on the same plot. If your prior is wrapped in a R function, you can then use the <code><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html">overlay_function()</a></code> for this. In our case, we used a uniform distribution as our prior:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html">mcmc_dens</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html">overlay_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"dunif"</span>, geom <span class="op">=</span> <span class="st">"density"</span>, color <span class="op">=</span> <span class="st">"red"</span>, fill <span class="op">=</span> <span class="st">"darkred"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
   </div>
 

@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
       </span>
     </div>
 
@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+    </li>
+    <li>
       <a href="../articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
     </li>
     <li>
@@ -62,8 +65,22 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Releases</li>
+    <li>
+      <a href="../articles/blog_v3.html">Version 3.0.0</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -98,9 +115,9 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span></code></pre></div>
-<div id="can-estimations-go-beyond-lower-inits-and-upper-inits" class="section level2">
+<div id="can-estimations-go-beyond-outside-the-range-of-the-inits" class="section level2">
 <h2 class="hasAnchor">
-<a href="#can-estimations-go-beyond-lower-inits-and-upper-inits" class="anchor"></a>Can estimations go beyond <code>lower.inits</code> and <code>upper.inits</code>?</h2>
+<a href="#can-estimations-go-beyond-outside-the-range-of-the-inits" class="anchor"></a>Can estimations go beyond outside the range of the <code>inits</code>?</h2>
 <p>Yes, the <code>lower.inits</code> and <code>upper.inits</code> control the range of the <em>initial</em> values, but the chain is still allowed to move freely after this initial step, as shown in the following example.</p>
 <p>Please report to the next question to learn how you can specify hard limits for the chains.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -110,11 +127,16 @@
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="op">}</span>
 
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
+  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>
+<span class="op">)</span>
+
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20201209</span><span class="op">)</span>
 
 <span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
   method <span class="op">=</span> <span class="st">"stretch"</span>,
   coda <span class="op">=</span> <span class="cn">TRUE</span>
@@ -131,22 +153,22 @@
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a -3.4972 9.084  0.16584         1.4141</span>
-<span class="co">#&gt; b -0.1255 4.116  0.07515         0.5463</span>
+<span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a -2.589 9.385  0.17134         1.4063</span>
+<span class="co">#&gt; b -0.178 3.179  0.05803         0.4064</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -20.642 -10.134 -2.887 3.098 12.403</span>
-<span class="co">#&gt; b  -9.974  -1.766  1.148 2.675  4.401</span></code></pre></div>
+<span class="co">#&gt;      2.5%     25%     50%   75%  97.5%</span>
+<span class="co">#&gt; a -17.659 -10.813 -3.0761 4.987 13.890</span>
+<span class="co">#&gt; b  -8.007  -1.967  0.2894 2.308  4.266</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">5</span>, b <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
   method <span class="op">=</span> <span class="st">"differential.evolution"</span>,
   coda <span class="op">=</span> <span class="cn">TRUE</span>
@@ -163,15 +185,15 @@
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;       Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a  0.14194 9.874  0.18028         0.9203</span>
-<span class="co">#&gt; b -0.01001 3.697  0.06751         0.4142</span>
+<span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a -2.748 12.440   0.2271         0.8796</span>
+<span class="co">#&gt; b -1.968  7.167   0.1309         0.4871</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%     50%   75% 97.5%</span>
-<span class="co">#&gt; a -19.189 -6.265 -0.1711 7.735 18.07</span>
-<span class="co">#&gt; b  -8.556 -1.963  1.2788 2.687  4.34</span></code></pre></div>
+<span class="co">#&gt;     2.5%    25%     50%   75%  97.5%</span>
+<span class="co">#&gt; a -29.35 -9.852 -1.4929 6.711 18.585</span>
+<span class="co">#&gt; b -22.84 -2.438  0.3308 2.455  4.217</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
@@ -193,9 +215,14 @@
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="op">}</span>
 
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
+  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="op">)</span>
+
 <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log.restricted</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
   method <span class="op">=</span> <span class="st">"stretch"</span>,
   coda <span class="op">=</span> <span class="cn">TRUE</span>
@@ -212,14 +239,14 @@
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.4672 0.2734 0.004991        0.03011</span>
-<span class="co">#&gt; b 0.6363 0.2702 0.004933        0.02835</span>
+<span class="co">#&gt; a 0.4893 0.2933 0.005354        0.02960</span>
+<span class="co">#&gt; b 0.6585 0.2659 0.004854        0.02577</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span>
-<span class="co">#&gt; a 0.02576 0.2492 0.4503 0.6889 0.9588</span>
-<span class="co">#&gt; b 0.08348 0.4246 0.6867 0.8761 0.9877</span></code></pre></div>
+<span class="co">#&gt; a 0.01970 0.2284 0.4886 0.7428 0.9728</span>
+<span class="co">#&gt; b 0.05949 0.4930 0.7391 0.8683 0.9904</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -240,7 +267,7 @@
 
 <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">posterior.log</span>,
-  lower.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">0</span>, b <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, upper.inits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  inits <span class="op">=</span> <span class="va">unif_inits</span>,
   max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
   method <span class="op">=</span> <span class="st">"stretch"</span>,
   coda <span class="op">=</span> <span class="cn">TRUE</span>
@@ -257,14 +284,14 @@
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.4894 0.2837 0.004012        0.02465</span>
-<span class="co">#&gt; b 0.6694 0.2560 0.003621        0.02742</span>
+<span class="co">#&gt; a 0.5154 0.2902 0.004104        0.02478</span>
+<span class="co">#&gt; b 0.6838 0.2356 0.003332        0.02035</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span>
-<span class="co">#&gt; a 0.02866 0.2375 0.4781 0.7252 0.9754</span>
-<span class="co">#&gt; b 0.07805 0.4989 0.7268 0.8878 0.9909</span></code></pre></div>
+<span class="co">#&gt; a 0.02785 0.2611 0.5357 0.7700 0.9854</span>
+<span class="co">#&gt; b 0.12319 0.5347 0.7367 0.8734 0.9893</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
