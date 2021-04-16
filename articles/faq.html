@@ -55,7 +55,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
+      <a href="../articles/blog/blog_v3.html">mcmcensemble 3.0.0: new way of specifying inits values</a>
     </li>
     <li>
       <a href="../articles/diagnostic-pkgs.html">Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</a>
@@ -154,14 +154,14 @@
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a -2.7140 7.987  0.14582         1.2260</span>
-<span class="co">#&gt; b  0.5556 2.871  0.05242         0.3549</span>
+<span class="co">#&gt; a -1.9610 9.524  0.17389          1.011</span>
+<span class="co">#&gt; b -0.1878 3.999  0.07301          0.513</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%    50%   75% 97.5%</span>
-<span class="co">#&gt; a -17.171 -8.282 -3.868 3.048 13.11</span>
-<span class="co">#&gt; b  -6.966 -0.818  1.384 2.551  4.32</span></code></pre></div>
+<span class="co">#&gt;     2.5%    25%    50%   75% 97.5%</span>
+<span class="co">#&gt; a -18.89 -8.764 -2.494 4.105 18.74</span>
+<span class="co">#&gt; b -10.92 -1.719  1.181 2.614  4.21</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -186,14 +186,14 @@
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a  1.056 10.696  0.19528         1.1476</span>
-<span class="co">#&gt; b -0.585  4.597  0.08392         0.5647</span>
+<span class="co">#&gt; a -3.708 11.189   0.2043          1.345</span>
+<span class="co">#&gt; b -1.454  5.571   0.1017          0.662</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     2.5%    25%      50%   75%  97.5%</span>
-<span class="co">#&gt; a -19.15 -6.055 -0.06358 8.299 22.958</span>
-<span class="co">#&gt; b -13.74 -2.724  1.28337 2.607  4.207</span></code></pre></div>
+<span class="co">#&gt;     2.5%     25%    50%   75%  97.5%</span>
+<span class="co">#&gt; a -25.63 -11.518 -2.824 4.430 15.547</span>
+<span class="co">#&gt; b -16.96  -2.735  0.485 2.435  4.271</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
