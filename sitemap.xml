@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//index.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/404.html</loc>
   </url>
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//reference/MCMCEnsemble.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//reference/mcmcensemble-package.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/articles/blog/blog_v3.html</loc>
   </url>
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//articles/blog/blog_v3.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html</loc>
   </url>
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//articles/diagnostic-pkgs.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/articles/faq.html</loc>
   </url>
   <url>
-    <loc>https://bisaloo.github.io/mcmcensemble//articles/faq.html</loc>
+    <loc>https://bisaloo.github.io/mcmcensemble/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/reference/MCMCEnsemble.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://bisaloo.github.io/mcmcensemble/reference/mcmcensemble-package.html</loc>
   </url>
 </urlset>

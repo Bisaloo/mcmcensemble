@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
@@ -61,8 +57,9 @@
       <a href="../articles/faq.html">Frequently Asked Questions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -78,7 +75,8 @@
       <a href="../articles/blog/blog_v3.html">Version 3.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -86,7 +84,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Bisaloo/mcmcensemble/">
+  <a href="https://github.com/Bisaloo/mcmcensemble/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -107,7 +105,7 @@
       <h1 data-toc-skip>Frequently Asked Questions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/Bisaloo/mcmcensemble/blob/master/vignettes/faq.Rmd"><code>vignettes/faq.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Bisaloo/mcmcensemble/blob/HEAD/vignettes/faq.Rmd" class="external-link"><code>vignettes/faq.Rmd</code></a></small>
       <div class="hidden name"><code>faq.Rmd</code></div>
 
     </div>
@@ -115,10 +113,10 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span></code></pre></div>
-<div id="can-estimations-go-beyond-outside-the-range-of-the-inits" class="section level2">
-<h2 class="hasAnchor">
-<a href="#can-estimations-go-beyond-outside-the-range-of-the-inits" class="anchor"></a>Can estimations go beyond outside the range of the <code>inits</code>?</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="can-estimations-go-beyond-outside-the-range-of-the-inits">Can estimations go beyond outside the range of the <code>inits</code>?<a class="anchor" aria-label="anchor" href="#can-estimations-go-beyond-outside-the-range-of-the-inits"></a>
+</h2>
 <p>Yes, the <code>inits</code> and <code>inits</code> control the range of the <em>initial</em> values, but the chain is still allowed to move freely after this initial step, as shown in the following example.</p>
 <p>Please report to the next question to learn how you can specify hard limits for the chains.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -128,12 +126,12 @@
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="op">}</span>
 
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
-  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
+  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>
 <span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20201209</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20201209</span><span class="op">)</span>
 
 <span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
   <span class="va">p.log</span>,
@@ -144,7 +142,7 @@
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:300</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -154,17 +152,17 @@
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a -4.660 11.095   0.2026         1.1048</span>
-<span class="co">#&gt; b -1.653  6.241   0.1139         0.6989</span>
+<span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a -3.7699 8.459  0.15443         1.0825</span>
+<span class="co">#&gt; b  0.2199 3.513  0.06413         0.3638</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     2.5%     25%     50%   75%  97.5%</span>
-<span class="co">#&gt; a -27.45 -11.908 -4.9494 2.327 19.054</span>
-<span class="co">#&gt; b -20.50  -4.833  0.8194 2.600  4.453</span></code></pre></div>
+<span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
+<span class="co">#&gt; a -18.817 -10.058 -3.880 2.475 11.651</span>
+<span class="co">#&gt; b  -8.413  -1.674  1.416 2.840  4.371</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
@@ -176,7 +174,7 @@
 <span class="op">)</span>
 <span class="co">#&gt; Using differential.evolution move with 10 walkers.</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:300</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -186,39 +184,39 @@
 <span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
 <span class="co">#&gt;    plus standard error of the mean:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.4583 9.288   0.1696         0.9237</span>
-<span class="co">#&gt; b 0.2161 3.489   0.0637         0.3069</span>
+<span class="co">#&gt;       Mean    SD Naive SE Time-series SE</span>
+<span class="co">#&gt; a  0.39310 9.783   0.1786         0.9723</span>
+<span class="co">#&gt; b -0.03014 3.626   0.0662         0.3403</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; 2. Quantiles for each variable:</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%     50%   75%  97.5%</span>
-<span class="co">#&gt; a -15.517 -6.483 -0.0924 7.129 19.159</span>
-<span class="co">#&gt; b  -8.662 -1.363  1.2419 2.622  4.239</span></code></pre></div>
+<span class="co">#&gt;      2.5%    25%    50%   75%  97.5%</span>
+<span class="co">#&gt; a -17.392 -6.804 0.8188 6.495 19.605</span>
+<span class="co">#&gt; b  -8.336 -1.883 1.3790 2.651  4.625</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
-<div id="how-to-restrict-the-possible-parameter-range" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-restrict-the-possible-parameter-range" class="anchor"></a>How to restrict the possible parameter range?</h2>
+<div class="section level2">
+<h2 id="how-to-restrict-the-possible-parameter-range">How to restrict the possible parameter range?<a class="anchor" aria-label="anchor" href="#how-to-restrict-the-possible-parameter-range"></a>
+</h2>
 <p>There is no built-in way to define hard limits for the parameter and make sure they never go outside of this range.</p>
 <p>The recommended way to address this issue is to handle these cases in the function <code>f</code> you provide.</p>
 <p>For example, to keep parameters in the 0-1 range:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p.log.restricted</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>
+  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>
   <span class="op">}</span>
   
   <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
   <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
 <span class="op">}</span>
 
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
+  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
@@ -229,7 +227,7 @@
   coda <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:300</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -249,12 +247,12 @@
 <span class="co">#&gt; a 0.01970 0.2284 0.4886 0.7428 0.9728</span>
 <span class="co">#&gt; b 0.05949 0.4930 0.7391 0.8683 0.9904</span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>This might seem inconvenient but in most cases, users will define their posterior probability as the product of a prior probability and the likelihood. In this situation, values that are not contained in the log-prior density automatically return <code>-Inf</code> in the log-posterior and it is not necessary to define it explicitly:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">prior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
- <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">dunif</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+ <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">dunif</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">lkl.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -263,7 +261,7 @@
 <span class="op">}</span>
 
 <span class="va">posterior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu">prior.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">lkl.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu">prior.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">lkl.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="op">}</span>
 
 <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
@@ -274,7 +272,7 @@
   coda <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:500</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -294,7 +292,7 @@
 <span class="co">#&gt; a 0.02785 0.2611 0.5357 0.7700 0.9854</span>
 <span class="co">#&gt; b 0.12319 0.5347 0.7367 0.8734 0.9893</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
   </div>
@@ -310,11 +308,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.normalesup.org/~hgruson/">Hugo Gruson</a>, Sanda Dejanic, Andreas Scheidegger.</p>
+  <p></p>
+<p>Developed by <a href="https://www.normalesup.org/~hgruson/" class="external-link">Hugo Gruson</a>, Sanda Dejanic, Andreas Scheidegger.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -322,6 +322,8 @@
 
   
 
+
+  
 
   </body>
 </html>

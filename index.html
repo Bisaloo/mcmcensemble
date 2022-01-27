@@ -25,6 +25,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -66,8 +62,9 @@
       <a href="articles/faq.html">Frequently Asked Questions</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -83,7 +80,8 @@
       <a href="articles/blog/blog_v3.html">Version 3.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Changelog</a>
     </li>
   </ul>
@@ -91,7 +89,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Bisaloo/mcmcensemble/">
+  <a href="https://github.com/Bisaloo/mcmcensemble/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,28 +106,28 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="mcmcensemble" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#mcmcensemble" class="anchor"></a>mcmcensemble</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="mcmcensemble">mcmcensemble<a class="anchor" aria-label="anchor" href="#mcmcensemble"></a>
+</h1></div>
 <!-- badges: start -->
 
 <p>This R package provides ensemble samplers for affine-invariant Monte Carlo Markov Chain, which allow a faster convergence for badly scaled estimation problems. Two samplers are proposed: the ‘differential.evolution’ sampler from <a href="#ref-terBraak2008">ter Braak and Vrugt</a> (<a href="#ref-terBraak2008">2008</a>) and the ‘stretch’ sampler from <a href="#ref-Goodman2010">Goodman and Weare</a> (<a href="#ref-Goodman2010">2010</a>).</p>
-<p>For theoretical background about Ensemble MCMC (what are the benefits over simple MCMC? How do they work? What are the pitfalls?), please refer for example to <a href="https://doi.org/10.26207/46za-m573">this lecture</a> from Eric B. Ford (Penn State).</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the stable version of this package from <a href="https://cran.r-project.org/package=mcmcensemble">CRAN</a>:</p>
+<p>For theoretical background about Ensemble MCMC (what are the benefits over simple MCMC? How do they work? What are the pitfalls?), please refer for example to <a href="https://doi.org/10.26207/46za-m573" class="external-link">this lecture</a> from Eric B. Ford (Penn State).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the stable version of this package from <a href="https://cran.r-project.org/package=mcmcensemble" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span><span class="op">)</span></code></pre></div>
-<p>or the development version from <a href="https://github.com/bisaloo">GitHub</a>, via my <a href="https://bisaloo.r-universe.dev/">r-universe</a>:</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span><span class="op">)</span></code></pre></div>
+<p>or the development version from <a href="https://github.com/bisaloo" class="external-link">GitHub</a>, via my <a href="https://bisaloo.r-universe.dev/" class="external-link">r-universe</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span>, repos <span class="op">=</span> <span class="st">"https://bisaloo.r-universe.dev"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span>, repos <span class="op">=</span> <span class="st">"https://bisaloo.r-universe.dev"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Bisaloo/mcmcensemble">mcmcensemble</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span>
 
 <span class="co">## a log-pdf to sample from</span>
 <span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
@@ -139,9 +137,9 @@
 
 <span class="co">## set options and starting point</span>
 <span class="va">n_walkers</span> <span class="op">&lt;-</span> <span class="fl">10</span>
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-  <span class="st">"a"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
-  <span class="st">"b"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
+<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  <span class="st">"a"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,
+  <span class="st">"b"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n_walkers</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span>
 
 <span class="co">## use stretch move</span>
@@ -150,10 +148,10 @@
                      method <span class="op">=</span> <span class="st">"stretch"</span><span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res1</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">res1</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "stretch"</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">res1</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res1</span><span class="op">)</span>
 <span class="co">#&gt; List of 2</span>
 <span class="co">#&gt;  $ samples: num [1:10, 1:500, 1:2] 0.42619 0.45413 0.00133 0.59391 0.35217 ...</span>
 <span class="co">#&gt;   ..- attr(*, "dimnames")=List of 3</span>
@@ -165,7 +163,7 @@
 <span class="co">#&gt;   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
 <span class="co">#&gt;   .. ..$ : chr [1:500] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
 <span class="co">#&gt;  - attr(*, "ensemble.sampler")= chr "stretch"</span></code></pre></div>
-<p>If the <a href="https://cran.r-project.org/package=coda">coda</a> package is installed, you can then use the <code>coda = TRUE</code> argument to get objects of class <code>mcmc.list</code>. The coda package then allows you to call <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> to get informative and nicely formatted results and plots:</p>
+<p>If the <a href="https://cran.r-project.org/package=coda" class="external-link">coda</a> package is installed, you can then use the <code>coda = TRUE</code> argument to get objects of class <code>mcmc.list</code>. The coda package then allows you to call <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> to get informative and nicely formatted results and plots:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## use stretch move, return samples as 'coda' object</span>
 <span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
@@ -173,10 +171,10 @@
                      method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Using stretch move with 10 walkers.</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res2</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">res2</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "stretch"</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:500</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -195,7 +193,7 @@
 <span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
 <span class="co">#&gt; a -19.563 -8.1257 -1.429 4.862 13.448</span>
 <span class="co">#&gt; b  -8.809 -0.7837  1.199 2.519  4.225</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-stretch-1.svg" width="100%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## use different evolution move, return samples as 'coda' object</span>
@@ -204,10 +202,10 @@
                      method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Using differential.evolution move with 10 walkers.</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">res3</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">res3</span>, <span class="st">"ensemble.sampler"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "differential.evolution"</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Iterations = 1:500</span>
 <span class="co">#&gt; Thinning interval = 1 </span>
@@ -226,56 +224,56 @@
 <span class="co">#&gt;     2.5%     25%     50%   75% 97.5%</span>
 <span class="co">#&gt; a -23.87 -6.4298 -0.2157 6.038 16.33</span>
 <span class="co">#&gt; b -13.53 -0.8687  1.6170 2.583  4.22</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-de-1.svg" width="100%"></p>
 <p>To see more plotting and MCMC diagnostic options, please refer to the relevant vignette: <a href="https://bisaloo.github.io/mcmcensemble/articles/diagnostic-pkgs.html"><code>vignette("diagnostic-pkgs", package = "mcmcensemble")</code></a></p>
 </div>
-<div id="progress-bar" class="section level2">
-<h2 class="hasAnchor">
-<a href="#progress-bar" class="anchor"></a>Progress bar</h2>
-<p>You can choose to enable a progress bar thanks to the <a href="https://cran.r-project.org/package=progressr">progressr</a> package. This can be done by adding the following line to your script before running <code><a href="reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>:</p>
+<div class="section level2">
+<h2 id="progress-bar">Progress bar<a class="anchor" aria-label="anchor" href="#progress-bar"></a>
+</h2>
+<p>You can choose to enable a progress bar thanks to the <a href="https://cran.r-project.org/package=progressr" class="external-link">progressr</a> package. This can be done by adding the following line to your script before running <code><a href="reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># requires R &gt;= 4.0</span>
-<span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/progressr/man/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"progress"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># requires R &gt;= 4.0</span>
+<span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span><span class="st">"progress"</span><span class="op">)</span>
 
 <span class="fu"><a href="reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span><span class="va">p.log</span>, inits <span class="op">=</span> <span class="va">unif_inits</span>,
             max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="va">n_walkers</span>,
             method <span class="op">=</span> <span class="st">"differential.evolution"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="parallel-processing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#parallel-processing" class="anchor"></a>Parallel processing</h2>
-<p>This package is set up to allow transparent parallel processing when requested by the user thanks to the framework provided by the <a href="https://cran.r-project.org/package=future">future</a> package. To enable parallel processing, you must run:</p>
+<div class="section level2">
+<h2 id="parallel-processing">Parallel processing<a class="anchor" aria-label="anchor" href="#parallel-processing"></a>
+</h2>
+<p>This package is set up to allow transparent parallel processing when requested by the user thanks to the framework provided by the <a href="https://cran.r-project.org/package=future" class="external-link">future</a> package. To enable parallel processing, you must run:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/future/man/plan.html">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">future</span><span class="fu">::</span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="st">"multiprocess"</span><span class="op">)</span></code></pre></div>
 <p>at the start of your session.</p>
 </div>
-<div id="similar-projects" class="section level2">
-<h2 class="hasAnchor">
-<a href="#similar-projects" class="anchor"></a>Similar projects</h2>
-<p>The Goodman-Weare ‘stretch’ sampler is also available in the <a href="https://github.com/svdataman/tonic">tonic R package</a>.</p>
+<div class="section level2">
+<h2 id="similar-projects">Similar projects<a class="anchor" aria-label="anchor" href="#similar-projects"></a>
+</h2>
+<p>The Goodman-Weare ‘stretch’ sampler is also available in the <a href="https://github.com/svdataman/tonic" class="external-link">tonic R package</a>.</p>
 <p>The methods used in this package also have (independent) implementations in other languages:</p>
 <ul>
-<li><a href="https://doi.org/10.21105/joss.01864">emcee v3: A Python ensemble sampling toolkit for affine-invariant MCMC</a></li>
-<li><a href="https://github.com/grinsted/gwmcmc">GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in Matlab</a></li>
+<li><a href="https://doi.org/10.21105/joss.01864" class="external-link">emcee v3: A Python ensemble sampling toolkit for affine-invariant MCMC</a></li>
+<li><a href="https://github.com/grinsted/gwmcmc" class="external-link">GWMCMC which implements the Goodman-Weare ‘stretch’ sampler in Matlab</a></li>
 </ul>
 </div>
-<div id="who-is-talking-about-this-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#who-is-talking-about-this-package" class="anchor"></a>Who is talking about this package?</h2>
+<div class="section level2">
+<h2 id="who-is-talking-about-this-package">Who is talking about this package?<a class="anchor" aria-label="anchor" href="#who-is-talking-about-this-package"></a>
+</h2>
 <ul>
-<li><a href="https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/">R View from October 2020</a></li>
+<li><a href="https://rviews.rstudio.com/2020/11/19/october-2020-top-40-new-cran-packages/" class="external-link">R View from October 2020</a></li>
 </ul>
 </div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-Goodman2010" class="csl-entry">
-<p>Goodman, Jonathan, and Jonathan Weare. 2010. “Ensemble Samplers with Affine Invariance.” <em>Communications in Applied Mathematics and Computational Science</em> 5 (1): 65–80. <a href="https://doi.org/10.2140/camcos.2010.5.65" class="uri">https://doi.org/10.2140/camcos.2010.5.65</a>.</p>
+<p>Goodman, Jonathan, and Jonathan Weare. 2010. “Ensemble Samplers with Affine Invariance.” <em>Communications in Applied Mathematics and Computational Science</em> 5 (1): 65–80. <a href="https://doi.org/10.2140/camcos.2010.5.65" class="external-link uri">https://doi.org/10.2140/camcos.2010.5.65</a>.</p>
 </div>
 <div id="ref-terBraak2008" class="csl-entry">
-<p>ter Braak, Cajo J. F., and Jasper A. Vrugt. 2008. “Differential Evolution Markov Chain with Snooker Updater and Fewer Chains.” <em>Statistics and Computing</em> 18 (4): 435–46. <a href="https://doi.org/10.1007/s11222-008-9104-9" class="uri">https://doi.org/10.1007/s11222-008-9104-9</a>.</p>
+<p>ter Braak, Cajo J. F., and Jasper A. Vrugt. 2008. “Differential Evolution Markov Chain with Snooker Updater and Fewer Chains.” <em>Statistics and Computing</em> 18 (4): 435–46. <a href="https://doi.org/10.1007/s11222-008-9104-9" class="external-link uri">https://doi.org/10.1007/s11222-008-9104-9</a>.</p>
 </div>
 </div>
 </div>
@@ -284,53 +282,62 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=mcmcensemble">https://​cloud.r-project.org/​package=mcmcensemble</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/Bisaloo/mcmcensemble/">https://​github.com/​Bisaloo/​mcmcensemble/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Bisaloo/mcmcensemble/issues">
-    https://​github.com/​Bisaloo/​mcmcensemble/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://www.normalesup.org/~hgruson/">Hugo Gruson</a> <br><small class="roles"> Maintainer, author, copyright holder </small> <a href="https://orcid.org/0000-0002-4094-1476" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Sanda Dejanic <br><small class="roles"> Author, copyright holder </small>  </li>
-<li>Andreas Scheidegger <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0003-2575-2172" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=mcmcensemble" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/Bisaloo/mcmcensemble/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Bisaloo/mcmcensemble/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=mcmcensemble"><img src="https://www.r-pkg.org/badges/version-ago/mcmcensemble" alt="CRAN status"></a></li>
-<li><a href="https://github.com/Bisaloo/mcmcensemble/actions"><img src="https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master"><img src="https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing mcmcensemble</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="https://www.normalesup.org/~hgruson/" class="external-link">Hugo Gruson</a> <br><small class="roles"> Maintainer, author, copyright holder </small> <a href="https://orcid.org/0000-0002-4094-1476" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Sanda Dejanic <br><small class="roles"> Author, copyright holder </small>  </li>
+<li>Andreas Scheidegger <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0003-2575-2172" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=mcmcensemble" class="external-link"><img src="https://www.r-pkg.org/badges/version-ago/mcmcensemble" alt="CRAN status"></a></li>
+<li><a href="https://github.com/Bisaloo/mcmcensemble/actions" class="external-link"><img src="https://github.com/Bisaloo/mcmcensemble/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/Bisaloo/mcmcensemble?branch=master" class="external-link"><img src="https://codecov.io/gh/Bisaloo/mcmcensemble/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://www.normalesup.org/~hgruson/">Hugo Gruson</a>, Sanda Dejanic, Andreas Scheidegger.</p>
+  <p></p>
+<p>Developed by <a href="https://www.normalesup.org/~hgruson/" class="external-link">Hugo Gruson</a>, Sanda Dejanic, Andreas Scheidegger.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -338,6 +345,8 @@
 
   
 
+
+  
 
   </body>
 </html>
