@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0.9000</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,7 +64,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -99,10 +99,11 @@
 
       
 
-      </header><script src="diagnostic-pkgs_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Interaction of mcmcensemble with other packages for MCMC diagnostic and plotting</h1>
+      <h1 data-toc-skip>Interaction of mcmcensemble with other packages
+for MCMC diagnostic and plotting</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/Bisaloo/mcmcensemble/blob/HEAD/vignettes/diagnostic-pkgs.Rmd" class="external-link"><code>vignettes/diagnostic-pkgs.Rmd</code></a></small>
@@ -112,125 +113,151 @@
 
     
     
-<p>To keep mcmcensemble as lean as possible, all diagnostics and plotting facilities are outsourced to other packages. It makes more sense to rely on these generic packages as the tools they provide can be used by many other MCMC packages.</p>
-<p>To our knowledge, there are two such packages that are readily compatible with mcmcensemble (but please <a href="https://github.com/Bisaloo/mcmcensemble/issues/new/choose" class="external-link">open an issue in the GitHub repository</a> if you find others):</p>
+<p>To keep mcmcensemble as lean as possible, all diagnostics and
+plotting facilities are outsourced to other packages. It makes more
+sense to rely on these generic packages as the tools they provide can be
+used by many other MCMC packages.</p>
+<p>To our knowledge, there are two such packages that are readily
+compatible with mcmcensemble (but please <a href="https://github.com/Bisaloo/mcmcensemble/issues/new/choose" class="external-link">open an
+issue in the GitHub repository</a> if you find others):</p>
 <ul>
 <li>
-<a href="https://cran.r-project.org/package=coda" class="external-link">coda</a>, a widespread package defining a common format for MCMC object and various utilities</li>
+<a href="https://cran.r-project.org/package=coda" class="external-link">coda</a>, a
+widespread package defining a common format for MCMC object and various
+utilities</li>
 <li>
-<a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a>, a more recent package developed by the <a href="https://mc-stan.org/" class="external-link">Stan team</a> a which offers a larger variety of plotting options based on <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>
+<a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a>, a more
+recent package developed by the <a href="https://mc-stan.org/" class="external-link">Stan
+team</a> a which offers a larger variety of plotting options based on <a href="https://ggplot2.tidyverse.org/" class="external-link">ggplot2</a>
 </li>
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span>
-
-<span class="co">## a log-pdf to sample from</span>
-<span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
-  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
-<span class="op">}</span>
-
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## a log-pdf to sample from</span></span>
+<span><span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span></span>
+<span>  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="coda">coda<a class="anchor" aria-label="anchor" href="#coda"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">coda</span><span class="op">)</span></code></pre></div>
-<p><em>Usage of the coda package to diagnostic and plot your mcmc chains require the use of the <code>coda = TRUE</code> option in your <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code> call:</em></p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">coda</span><span class="op">)</span></span></code></pre></div>
+<p><em>Usage of the coda package to diagnostic and plot your mcmc chains
+require the use of the <code>coda = TRUE</code> option in your
+<code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code> call:</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## use stretch move, return samples as 'coda' object</span>
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span></code></pre></div>
-<p>The estimations are stored in the <code>samples</code> element of the result. This element is of class <code>mcmc.list</code>:</p>
+<code class="sourceCode R"><span><span class="co">## use stretch move, return samples as 'coda' object</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span></code></pre></div>
+<p>The estimations are stored in the <code>samples</code> element of the
+result. This element is of class <code>mcmc.list</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; [1] "mcmc.list"</span></code></pre></div>
-<p>As such, it can use specific method from the coda package, such as <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "mcmc.list"</span></span></code></pre></div>
+<p>As such, it can use specific method from the coda package, such as
+<code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> or <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
-<span class="co">#&gt; Thinning interval = 1 </span>
-<span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
-<span class="co">#&gt;    plus standard error of the mean:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a  1.7088 10.254  0.18720         1.1741</span>
-<span class="co">#&gt; b -0.4099  4.032  0.07362         0.3533</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 2. Quantiles for each variable:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     2.5%    25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -17.25 -5.973 1.1492 8.376 21.817</span>
-<span class="co">#&gt; b -11.00 -1.725 0.9986 2.253  4.152</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Iterations = 1:300</span></span>
+<span><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span><span class="co">#&gt; Number of chains = 10 </span></span>
+<span><span class="co">#&gt; Sample size per chain = 300 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a  1.7088 10.254  0.18720         1.1741</span></span>
+<span><span class="co">#&gt; b -0.4099  4.032  0.07362         0.3533</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     2.5%    25%    50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -17.25 -5.973 1.1492 8.376 21.817</span></span>
+<span><span class="co">#&gt; b -11.00 -1.725 0.9986 2.253  4.152</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>You can also use any other function from the coda package, such as <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize()</a></code>:</p>
+<p>You can also use any other function from the coda package, such as
+<code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt;         a         b </span>
-<span class="co">#&gt;  59.27473 113.52668</span></code></pre></div>
-<p>Please report to coda documentation to see the complete list of available functions.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt;         a         b </span></span>
+<span><span class="co">#&gt;  59.27473 113.52668</span></span></code></pre></div>
+<p>Please report to coda documentation to see the complete list of
+available functions.</p>
 </div>
 <div class="section level2">
 <h2 id="bayesplot">bayesplot<a class="anchor" aria-label="anchor" href="#bayesplot"></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning in register(): Can't find generic `scale_type` in package ggplot2 to</span>
-<span class="co">#&gt; register S3 method.</span>
-<span class="co">#&gt; This is bayesplot version 1.8.1</span>
-<span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span>
-<span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span>
-<span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span>
-<span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></code></pre></div>
-<p>As opposed to the previous example, bayesplot is readily compatible with all outputs from <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>, no matter the value you specified for the <code>coda</code> argument:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; This is bayesplot version 1.11.1</span></span>
+<span><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span></span>
+<span><span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span></span>
+<span><span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span></span>
+<span><span class="co">#&gt;    * See ?bayesplot_theme_set for details on theme setting</span></span></code></pre></div>
+<p>As opposed to the previous example, bayesplot is readily compatible
+with all outputs from <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code>, no matter the value
+you specified for the <code>coda</code> argument:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res_nocoda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span>
-
-<span class="va">res_coda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res_nocoda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span>
+<span></span>
+<span><span class="va">res_coda</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>, method <span class="op">=</span> <span class="st">"stretch"</span>, coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span></code></pre></div>
 <p>We can use the various plotting facilities:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Density of log-posterior of each parameter</span>
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html" class="external-link">mcmc_areas</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html" class="external-link">mcmc_areas</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-
-<span class="co"># All the sample points in the parameter space</span>
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Density of log-posterior of each parameter</span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html" class="external-link">mcmc_areas</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-intervals.html" class="external-link">mcmc_areas</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># All the sample points in the parameter space</span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-1.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-2.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-3.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-4.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-5.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-6.png" width="45%"></p>
-<p>However, a limited number of functions still only work with <code>coda = TRUE</code>. It is for example the case of <code><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace()</a></code>:</p>
+<p>However, a limited number of functions still only work with
+<code>coda = TRUE</code>. It is for example the case of
+<code><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
-<p>Because bayesplot relies on ggplot and its layer system, you can add extra layers as necessary. For example, a common request is how to display the prior and posterior density on the same plot. If your prior is wrapped in a R function, you can then use the <code><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html" class="external-link">overlay_function()</a></code> for this. In our case, we used a uniform distribution as our prior:</p>
+<p>Because bayesplot relies on ggplot and its layer system, you can add
+extra layers as necessary. For example, a common request is how to
+display the prior and posterior density on the same plot. If your prior
+is wrapped in a R function, you can then use the
+<code><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html" class="external-link">overlay_function()</a></code> for this. In our case, we used a uniform
+distribution as our prior:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html" class="external-link">overlay_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"dunif"</span>, geom <span class="op">=</span> <span class="st">"density"</span>, color <span class="op">=</span> <span class="st">"red"</span>, fill <span class="op">=</span> <span class="st">"darkred"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-distributions.html" class="external-link">mcmc_dens</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://mc-stan.org/bayesplot/reference/bayesplot-helpers.html" class="external-link">overlay_function</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="st">"dunif"</span>, geom <span class="op">=</span> <span class="st">"density"</span>, color <span class="op">=</span> <span class="st">"red"</span>, fill <span class="op">=</span> <span class="st">"darkred"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Computation failed in `stat_function()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_function()`.</span></span>
+<span><span class="co">#&gt; Caused by error in `fun()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "fun"</span></span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
   </div>
@@ -252,7 +279,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

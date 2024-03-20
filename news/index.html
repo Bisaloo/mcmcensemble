@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0.9000</span>
       </span>
     </div>
 
@@ -26,7 +26,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -43,7 +43,7 @@
     </li>
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -77,6 +77,13 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="development version" id="mcmcensemble-development-version">mcmcensemble (development version)<a class="anchor" aria-label="anchor" href="#mcmcensemble-development-version"></a></h2>
+<div class="section level3">
+<h3 id="minor-improvements-development-version">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-development-version"></a></h3>
+<ul><li>there is now a clearer error message when trying to use a single walker since ensemble sampling is designed to work with multiple walkers (<a href="https://github.com/Bisaloo/mcmcensemble/issues/6" class="external-link">#6</a> by <a href="https://github.com/Bisaloo" class="external-link">@Bisaloo</a>, based on a report from <a href="https://github.com/adamkucharski" class="external-link">@adamkucharski</a>).</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="3.0.0" id="mcmcensemble-300">mcmcensemble 3.0.0<small>2021-04-28</small><a class="anchor" aria-label="anchor" href="#mcmcensemble-300"></a></h2>
 <div class="section level3">
 <h3 id="major-changes-3-0-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-3-0-0"></a></h3>
@@ -100,11 +107,11 @@
 <h3 id="major-changes-2-2-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-2-2-0"></a></h3>
 <ul><li>it is now possible to use a named vector as first argument of the function passed in <code>f</code>. This is useful if you do something like:</li>
 </ul><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">p.log.named</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"b"</span><span class="op">]</span><span class="op">+</span><span class="va">B</span><span class="op">*</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">100</span><span class="op">*</span><span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="va">p.log.named</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">/</span><span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="st">"b"</span><span class="op">]</span><span class="op">+</span><span class="va">B</span><span class="op">*</span><span class="va">x</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">-</span><span class="fl">100</span><span class="op">*</span><span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <ul><li>mcmcensemble now explicitly depends on R &gt;= 3.5.0. This was already implicitly the case since 2.1 because of the dependency on the progressr package.</li>
 <li>the ensemble sampling algorithm used by <code><a href="../reference/MCMCEnsemble.html">MCMCEnsemble()</a></code> is now recorded in an additional attribute (accessible via <code>attr(res, "ensemble.sampler")</code>).</li>
 </ul></div>
@@ -163,7 +170,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

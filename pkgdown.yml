@@ -1,11 +1,11 @@
-pandoc: 2.7.3
-pkgdown: 2.0.2
+pandoc: 3.1.11
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   blog_v3: blog/blog_v3.html
   diagnostic-pkgs: diagnostic-pkgs.html
   faq: faq.html
-last_built: 2022-01-27T09:58Z
+last_built: 2024-03-20T12:34Z
 urls:
   reference: https://bisaloo.github.io/mcmcensemble/reference
   article: https://bisaloo.github.io/mcmcensemble/articles

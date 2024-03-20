@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.0.0.9000</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -64,7 +64,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -99,7 +99,7 @@
 
       
 
-      </header><script src="faq_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
@@ -113,186 +113,196 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
-<h2 id="can-estimations-go-beyond-outside-the-range-of-the-inits">Can estimations go beyond outside the range of the <code>inits</code>?<a class="anchor" aria-label="anchor" href="#can-estimations-go-beyond-outside-the-range-of-the-inits"></a>
+<h2 id="can-estimations-go-beyond-outside-the-range-of-the-inits">Can estimations go beyond outside the range of the
+<code>inits</code>?<a class="anchor" aria-label="anchor" href="#can-estimations-go-beyond-outside-the-range-of-the-inits"></a>
 </h2>
-<p>Yes, the <code>inits</code> and <code>inits</code> control the range of the <em>initial</em> values, but the chain is still allowed to move freely after this initial step, as shown in the following example.</p>
-<p>Please report to the next question to learn how you can specify hard limits for the chains.</p>
+<p>Yes, the <code>inits</code> and <code>inits</code> control the range
+of the <em>initial</em> values, but the chain is still allowed to move
+freely after this initial step, as shown in the following example.</p>
+<p>Please report to the next question to learn how you can specify hard
+limits for the chains.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">## a log-pdf to sample from</span>
-<span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
-  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
-<span class="op">}</span>
-
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,
-  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20201209</span><span class="op">)</span>
-
-<span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
-  method <span class="op">=</span> <span class="st">"stretch"</span>,
-  coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
-<span class="co">#&gt; Thinning interval = 1 </span>
-<span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
-<span class="co">#&gt;    plus standard error of the mean:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a -3.7699 8.459  0.15443         1.0825</span>
-<span class="co">#&gt; b  0.2199 3.513  0.06413         0.3638</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 2. Quantiles for each variable:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%     25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -18.817 -10.058 -3.880 2.475 11.651</span>
-<span class="co">#&gt; b  -8.413  -1.674  1.416 2.840  4.371</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## a log-pdf to sample from</span></span>
+<span><span class="va">p.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span></span>
+<span>  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="op">-</span><span class="fl">10</span>, max <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20201209</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"stretch"</span>,</span>
+<span>  coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Iterations = 1:300</span></span>
+<span><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span><span class="co">#&gt; Number of chains = 10 </span></span>
+<span><span class="co">#&gt; Sample size per chain = 300 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a -3.9979 9.405  0.17171         0.9947</span></span>
+<span><span class="co">#&gt; b -0.3153 4.253  0.07765         0.6451</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     2.5%     25%    50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -21.75 -10.841 -3.630 2.467 12.453</span></span>
+<span><span class="co">#&gt; b -11.43  -2.156  1.216 2.601  4.289</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
-  method <span class="op">=</span> <span class="st">"differential.evolution"</span>,
-  coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using differential.evolution move with 10 walkers.</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
-<span class="co">#&gt; Thinning interval = 1 </span>
-<span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
-<span class="co">#&gt;    plus standard error of the mean:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;       Mean    SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a  0.39310 9.783   0.1786         0.9723</span>
-<span class="co">#&gt; b -0.03014 3.626   0.0662         0.3403</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 2. Quantiles for each variable:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%    50%   75%  97.5%</span>
-<span class="co">#&gt; a -17.392 -6.804 0.8188 6.495 19.605</span>
-<span class="co">#&gt; b  -8.336 -1.883 1.3790 2.651  4.625</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">res2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"differential.evolution"</span>,</span>
+<span>  coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using differential.evolution move with 10 walkers.</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Iterations = 1:300</span></span>
+<span><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span><span class="co">#&gt; Number of chains = 10 </span></span>
+<span><span class="co">#&gt; Sample size per chain = 300 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a  0.2440 11.255  0.20549         0.8325</span></span>
+<span><span class="co">#&gt; b -0.9462  4.786  0.08738         0.2993</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     2.5%    25%   50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -23.00 -6.406 1.469 7.776 19.069</span></span>
+<span><span class="co">#&gt; b -13.32 -3.165 1.004 2.380  4.071</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="how-to-restrict-the-possible-parameter-range">How to restrict the possible parameter range?<a class="anchor" aria-label="anchor" href="#how-to-restrict-the-possible-parameter-range"></a>
 </h2>
-<p>There is no built-in way to define hard limits for the parameter and make sure they never go outside of this range.</p>
-<p>The recommended way to address this issue is to handle these cases in the function <code>f</code> you provide.</p>
+<p>There is no built-in way to define hard limits for the parameter and
+make sure they never go outside of this range.</p>
+<p>The recommended way to address this issue is to handle these cases in
+the function <code>f</code> you provide.</p>
 <p>For example, to keep parameters in the 0-1 range:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">p.log.restricted</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  
-  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>
-  <span class="op">}</span>
-  
-  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
-  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
-<span class="op">}</span>
-
-<span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
-  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,
-  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">p.log.restricted</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
-  method <span class="op">=</span> <span class="st">"stretch"</span>,
-  coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:300</span>
-<span class="co">#&gt; Thinning interval = 1 </span>
-<span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 300 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
-<span class="co">#&gt;    plus standard error of the mean:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.4893 0.2933 0.005354        0.02960</span>
-<span class="co">#&gt; b 0.6585 0.2659 0.004854        0.02577</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 2. Quantiles for each variable:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span>
-<span class="co">#&gt; a 0.01970 0.2284 0.4886 0.7428 0.9728</span>
-<span class="co">#&gt; b 0.05949 0.4930 0.7391 0.8683 0.9904</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">p.log.restricted</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">0</span>, <span class="va">x</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span></span>
+<span>  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">unif_inits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
+<span>  a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">p.log.restricted</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">3000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"stretch"</span>,</span>
+<span>  coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Iterations = 1:300</span></span>
+<span><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span><span class="co">#&gt; Number of chains = 10 </span></span>
+<span><span class="co">#&gt; Sample size per chain = 300 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a 0.4893 0.2933 0.005354        0.02960</span></span>
+<span><span class="co">#&gt; b 0.6585 0.2659 0.004854        0.02577</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span></span>
+<span><span class="co">#&gt; a 0.01970 0.2284 0.4886 0.7428 0.9728</span></span>
+<span><span class="co">#&gt; b 0.05949 0.4930 0.7391 0.8683 0.9904</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<p>This might seem inconvenient but in most cases, users will define their posterior probability as the product of a prior probability and the likelihood. In this situation, values that are not contained in the log-prior density automatically return <code>-Inf</code> in the log-posterior and it is not necessary to define it explicitly:</p>
+<p>This might seem inconvenient but in most cases, users will define
+their posterior probability as the product of a prior probability and
+the likelihood. In this situation, values that are not contained in the
+log-prior density automatically return <code>-Inf</code> in the
+log-posterior and it is not necessary to define it explicitly:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">prior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
- <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">dunif</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">lkl.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span>
-  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>
-<span class="op">}</span>
-
-<span class="va">posterior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu">prior.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">lkl.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
-<span class="op">}</span>
-
-<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span>
-  <span class="va">posterior.log</span>,
-  inits <span class="op">=</span> <span class="va">unif_inits</span>,
-  max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,
-  method <span class="op">=</span> <span class="st">"stretch"</span>,
-  coda <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span>
-<span class="co">#&gt; Using stretch move with 10 walkers.</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Iterations = 1:500</span>
-<span class="co">#&gt; Thinning interval = 1 </span>
-<span class="co">#&gt; Number of chains = 10 </span>
-<span class="co">#&gt; Sample size per chain = 500 </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span>
-<span class="co">#&gt;    plus standard error of the mean:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span>
-<span class="co">#&gt; a 0.5154 0.2902 0.004104        0.02478</span>
-<span class="co">#&gt; b 0.6838 0.2356 0.003332        0.02035</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; 2. Quantiles for each variable:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span>
-<span class="co">#&gt; a 0.02785 0.2611 0.5357 0.7700 0.9854</span>
-<span class="co">#&gt; b 0.12319 0.5347 0.7367 0.8734 0.9893</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">prior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">dunif</a></span><span class="op">(</span><span class="va">x</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">lkl.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">0.03</span> <span class="co"># controls 'bananacity'</span></span>
+<span>  <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">200</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">2</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">B</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">posterior.log</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu">prior.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">lkl.log</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/MCMCEnsemble.html">MCMCEnsemble</a></span><span class="op">(</span></span>
+<span>  <span class="va">posterior.log</span>,</span>
+<span>  inits <span class="op">=</span> <span class="va">unif_inits</span>,</span>
+<span>  max.iter <span class="op">=</span> <span class="fl">5000</span>, n.walkers <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"stretch"</span>,</span>
+<span>  coda <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using stretch move with 10 walkers.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Iterations = 1:500</span></span>
+<span><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span><span class="co">#&gt; Number of chains = 10 </span></span>
+<span><span class="co">#&gt; Sample size per chain = 500 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a 0.5154 0.2902 0.004104        0.02478</span></span>
+<span><span class="co">#&gt; b 0.6838 0.2356 0.003332        0.02035</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span></span>
+<span><span class="co">#&gt; a 0.02785 0.2611 0.5357 0.7700 0.9854</span></span>
+<span><span class="co">#&gt; b 0.12319 0.5347 0.7367 0.8734 0.9893</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
   </div>
@@ -314,7 +324,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
