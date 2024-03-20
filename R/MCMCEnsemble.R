@@ -97,6 +97,10 @@ MCMCEnsemble <- function(f, inits, max.iter, n.walkers = 10 * ncol(inits),
     inits <- as.matrix(inits)
   }
 
+  if (n.walkers < 2) {
+    stop("The number of walkers must be at least 2", call. = FALSE)
+  }
+
   if (nrow(inits) != n.walkers) {
     stop(
       "The number of rows of `inits` must be equal to `n.walkers`",

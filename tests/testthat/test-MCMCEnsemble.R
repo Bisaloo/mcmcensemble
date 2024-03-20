@@ -93,3 +93,12 @@ test_that("named arguments", {
   expect_identical(res1, res2)
 
 })
+
+test_that("input checking", {
+
+  expect_error(
+    MCMCEnsemble(p.log, inits=unif_inits, n.walkers = 1),
+    "at least 2"
+  )
+
+})
