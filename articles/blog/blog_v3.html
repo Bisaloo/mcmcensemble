@@ -122,7 +122,7 @@ for all the chains. If this increases somewhat the complexity of the
 package and the workload of the user, it has huge benefits that we will
 present now.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bisaloo.github.io/mcmcensemble/">mcmcensemble</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hugogruson.fr/mcmcensemble/" class="external-link">mcmcensemble</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html" class="external-link">packageVersion</a></span><span class="op">(</span><span class="st">"mcmcensemble"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] '3.0.0.9000'</span></span></code></pre>
 <div class="section level2">
@@ -164,14 +164,14 @@ do:</p>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##      Mean    SD Naive SE Time-series SE</span></span>
-<span><span class="co">## a -1.0587 8.478  0.11990         0.8012</span></span>
-<span><span class="co">## b  0.7995 2.852  0.04033         0.2970</span></span>
+<span><span class="co">## a -1.1214 9.168   0.1297         1.2025</span></span>
+<span><span class="co">## b  0.4317 3.430   0.0485         0.4058</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##     2.5%     25%   50%   75%  97.5%</span></span>
-<span><span class="co">## a -16.82 -7.2030 -1.25 4.844 15.155</span></span>
-<span><span class="co">## b  -6.31 -0.4376  1.63 2.676  4.284</span></span></code></pre>
+<span><span class="co">##     2.5%    25%     50%   75%  97.5%</span></span>
+<span><span class="co">## a -19.67 -7.364 -0.6952 5.444 15.483</span></span>
+<span><span class="co">## b  -8.89 -0.764  1.4873 2.606  4.456</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -200,15 +200,15 @@ Sobol sequence</a> available in the <a href="https://www.spacefillr.com/" class=
 <span><span class="co">## 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##           Mean    SD Naive SE Time-series SE</span></span>
-<span><span class="co">## para_1 -1.9009 7.986  0.11294         1.0214</span></span>
-<span><span class="co">## para_2  0.8347 3.075  0.04349         0.3542</span></span>
+<span><span class="co">##          Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">## para_1 0.1478 8.760  0.12388         0.8203</span></span>
+<span><span class="co">## para_2 0.6407 3.131  0.04428         0.3405</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##           2.5%     25%    50%   75%  97.5%</span></span>
-<span><span class="co">## para_1 -19.189 -7.0288 -1.139 3.689 11.162</span></span>
-<span><span class="co">## para_2  -9.129  0.2068  1.607 2.627  4.134</span></span></code></pre>
+<span><span class="co">## para_1 -16.895 -6.2096 0.6052 5.943 17.322</span></span>
+<span><span class="co">## para_2  -7.946 -0.4702 1.4398 2.652  4.409</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -251,14 +251,14 @@ short:</p>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">## a 0.5207 0.4311  0.06097        0.03111</span></span>
-<span><span class="co">## b 0.4928 0.5059  0.07154        0.03870</span></span>
+<span><span class="co">## a 0.6029 0.3789  0.05358        0.02015</span></span>
+<span><span class="co">## b 0.5975 0.4623  0.06537        0.02515</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##      2.5%    25%    50%    75% 97.5%</span></span>
-<span><span class="co">## a -0.3615 0.1957 0.4823 0.9244 1.201</span></span>
-<span><span class="co">## b -0.3303 0.2017 0.2435 0.8333 1.706</span></span></code></pre>
+<span><span class="co">## a -0.2211 0.4539 0.6604 0.8756 1.138</span></span>
+<span><span class="co">## b -0.1588 0.3153 0.5550 0.9811 1.297</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">short</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
