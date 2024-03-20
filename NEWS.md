@@ -1,5 +1,11 @@
 # mcmcensemble (development version)
 
+## Minor improvements
+
+* there is now a clearer error message when trying to use a single walker since
+ensemble sampling is designed to work with multiple walkers (#6 by @Bisaloo,
+based on a report from @adamkucharski).
+
 # mcmcensemble 3.0.0
 
 ## Major changes
