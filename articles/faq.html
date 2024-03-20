@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.1.0.9000</span>
       </span>
     </div>
 
@@ -156,15 +156,15 @@ limits for the chains.</p>
 <span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a -4.2953 7.998  0.14603         0.9195</span></span>
-<span><span class="co">#&gt; b  0.1612 3.524  0.06434         0.4024</span></span>
+<span><span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a -4.621 11.729   0.2141         1.0784</span></span>
+<span><span class="co">#&gt; b -2.126  6.839   0.1249         0.9295</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;      2.5%    25%    50%   75% 97.5%</span></span>
-<span><span class="co">#&gt; a -20.019 -10.34 -4.282 2.072 9.502</span></span>
-<span><span class="co">#&gt; b  -9.096  -1.25  1.436 2.554 4.349</span></span></code></pre></div>
+<span><span class="co">#&gt;     2.5%     25%     50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -28.95 -13.072 -3.8362 3.809 17.211</span></span>
+<span><span class="co">#&gt; b -20.63  -4.627  0.3295 2.364  4.209</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res1</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -188,15 +188,15 @@ limits for the chains.</p>
 <span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a -0.5138 11.23  0.20500          1.265</span></span>
-<span><span class="co">#&gt; b -0.9312  5.00  0.09128          0.722</span></span>
+<span><span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a -4.136 9.160  0.16723         0.8741</span></span>
+<span><span class="co">#&gt; b -0.236 4.078  0.07446         0.4401</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     2.5%    25%      50%   75%  97.5%</span></span>
-<span><span class="co">#&gt; a -23.88 -8.050 -0.08813 6.703 20.291</span></span>
-<span><span class="co">#&gt; b -15.86 -2.985  1.03428 2.480  4.252</span></span></code></pre></div>
+<span><span class="co">#&gt;     2.5%     25%    50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -22.63 -10.777 -3.657 3.218 11.823</span></span>
+<span><span class="co">#&gt; b -13.00  -1.561  1.179 2.444  4.324</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
