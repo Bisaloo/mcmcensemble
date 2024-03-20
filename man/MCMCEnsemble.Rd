@@ -23,7 +23,8 @@ walkers. Each column is a variable to estimate and each row is a walker}
 
 \item{max.iter}{maximum number of function evaluations}
 
-\item{n.walkers}{number of walkers (ensemble size)}
+\item{n.walkers}{number of walkers (ensemble size). An integer greater or
+equal than 2.}
 
 \item{method}{method for proposal generation, either \code{"stretch"}, or
 \code{"differential.evolution"}. This argument will be saved as an attribute

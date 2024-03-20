@@ -10,7 +10,8 @@
 #' @param inits A matrix (or data.frame) containing the starting values for the
 #'   walkers. Each column is a variable to estimate and each row is a walker
 #' @param max.iter maximum number of function evaluations
-#' @param n.walkers number of walkers (ensemble size)
+#' @param n.walkers number of walkers (ensemble size). An integer greater or
+#'   equal than 2.
 #' @param method method for proposal generation, either `"stretch"`, or
 #'   `"differential.evolution"`. This argument will be saved as an attribute
 #'   in the output (see examples).

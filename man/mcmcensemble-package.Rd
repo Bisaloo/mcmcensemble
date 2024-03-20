@@ -12,8 +12,8 @@ with two different ways of creating proposals.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/Bisaloo/mcmcensemble}
   \item \url{https://bisaloo.github.io/mcmcensemble/}
+  \item \url{https://github.com/Bisaloo/mcmcensemble}
   \item Report bugs at \url{https://github.com/Bisaloo/mcmcensemble/issues}
 }
 
