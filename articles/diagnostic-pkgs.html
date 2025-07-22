@@ -177,15 +177,15 @@ result. This element is of class <code>mcmc.list</code>:</p>
 <span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a  1.7088 10.254  0.18720         1.1741</span></span>
-<span><span class="co">#&gt; b -0.4099  4.032  0.07362         0.3533</span></span>
+<span><span class="co">#&gt;     Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a 0.4874 9.061  0.16542         1.0433</span></span>
+<span><span class="co">#&gt; b 0.4285 3.063  0.05591         0.3761</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     2.5%    25%    50%   75%  97.5%</span></span>
-<span><span class="co">#&gt; a -17.25 -5.973 1.1492 8.376 21.817</span></span>
-<span><span class="co">#&gt; b -11.00 -1.725 0.9986 2.253  4.152</span></span></code></pre></div>
+<span><span class="co">#&gt;      2.5%    25%    50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -16.368 -5.809 0.5198 6.812 16.310</span></span>
+<span><span class="co">#&gt; b  -6.636 -1.349 1.1132 2.610  4.345</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
@@ -193,8 +193,8 @@ result. This element is of class <code>mcmc.list</code>:</p>
 <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         a         b </span></span>
-<span><span class="co">#&gt;  59.27473 113.52668</span></span></code></pre></div>
+<span><span class="co">#&gt;        a        b </span></span>
+<span><span class="co">#&gt; 61.24944 89.37153</span></span></code></pre></div>
 <p>Please report to coda documentation to see the complete list of
 available functions.</p>
 </div>

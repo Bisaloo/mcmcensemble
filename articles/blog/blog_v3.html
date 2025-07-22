@@ -162,15 +162,15 @@ do:</p>
 <span><span class="co">## 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##      Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">## a -1.5417 10.127  0.14322         1.0682</span></span>
-<span><span class="co">## b -0.1906  4.281  0.06055         0.6273</span></span>
+<span><span class="co">##      Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">## a -1.1480 9.514  0.13455         1.1151</span></span>
+<span><span class="co">## b  0.1388 3.746  0.05298         0.4102</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##     2.5%    25%    50%   75%  97.5%</span></span>
-<span><span class="co">## a -17.46 -9.340 -2.852 4.802 21.592</span></span>
-<span><span class="co">## b -12.08 -1.358  1.037 2.443  4.202</span></span></code></pre>
+<span><span class="co">##     2.5%    25%     50%   75%  97.5%</span></span>
+<span><span class="co">## a -21.46 -7.431 -0.5148 5.785 16.278</span></span>
+<span><span class="co">## b -11.07 -1.045  1.3233 2.534  4.225</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
@@ -199,15 +199,15 @@ Sobol sequence</a> available in the <a href="https://www.spacefillr.com/" class=
 <span><span class="co">## 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##            Mean    SD Naive SE Time-series SE</span></span>
-<span><span class="co">## para_1 -0.09748 9.288  0.13135         1.2588</span></span>
-<span><span class="co">## para_2  0.39403 3.711  0.05248         0.5186</span></span>
+<span><span class="co">##          Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">## para_1 0.3774 8.990  0.12714         1.2219</span></span>
+<span><span class="co">## para_2 0.5357 3.238  0.04579         0.4396</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##          2.5%     25%     50%   75%  97.5%</span></span>
-<span><span class="co">## para_1 -18.93 -6.1488 -0.2544 5.786 18.991</span></span>
-<span><span class="co">## para_2 -10.76 -0.4612  1.5266 2.670  4.316</span></span></code></pre>
+<span><span class="co">##           2.5%     25%   50%   75%  97.5%</span></span>
+<span><span class="co">## para_1 -18.928 -5.3167 0.774 7.048 16.266</span></span>
+<span><span class="co">## para_2  -9.294 -0.4218 1.476 2.695  4.325</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
@@ -250,14 +250,14 @@ short:</p>
 <span><span class="co">##    plus standard error of the mean:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">## a 0.4045 0.3756  0.05312        0.02178</span></span>
-<span><span class="co">## b 0.7410 0.5493  0.07769        0.04385</span></span>
+<span><span class="co">## a 0.5925 0.8864  0.12536        0.07851</span></span>
+<span><span class="co">## b 0.5825 0.5392  0.07626        0.04790</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## 2. Quantiles for each variable:</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##      2.5%    25%    50%    75% 97.5%</span></span>
-<span><span class="co">## a -0.2486 0.1994 0.3738 0.5798 1.185</span></span>
-<span><span class="co">## b  0.1575 0.4517 0.5866 0.8177 2.225</span></span></code></pre>
+<span><span class="co">## a -1.5280 0.2495 0.6015 0.9862 2.252</span></span>
+<span><span class="co">## b -0.6924 0.4502 0.6511 0.8021 1.661</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">short</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="blog_v3_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
