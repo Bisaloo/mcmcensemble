@@ -20,6 +20,11 @@
 #' Chain with snooker updater and fewer chains. Statistics and Computing,
 #' 18(4), 435–446, \doi{10.1007/s11222-008-9104-9}
 #'
+#' Nelson, B., Ford, E.B., Payne, M.J. (2013) Run Dmc: An Efficient, Parallel
+#' Code For Analyzing Radial Velocity Observations Using N-Body Integrations
+#' And Differential Evolution Markov Chain Monte Carlo. ApJS 210, 11,
+#' \doi{10.1088/0067-0049/210/1/11}
+#'
 #' @importFrom future.apply future_apply
 #'
 d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
@@ -46,7 +51,7 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   p()
 
   for (l in seq_len(chain.length)[-1]) {
-    ## # See Nelson et al. (2013), eq(10): https://doi.org/10.1088/0067-0049/210/1/11/.
+    ## See Nelson et al. (2013), eq(10).
     gamma0 <- 2.38 / sqrt(2 * n.params) 
     if (l %% 10 == 0) {
       gamma0 <- 1
@@ -74,7 +79,8 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
       active <- ensemble[active.idx, , drop = FALSE]
 
       ## proposal  x' = x + z · (y₁ − y₂)
-      ## See Nelson et al. (2013), eq(10), values are based on the defaults of Emcee.
+      ## See Nelson et al. (2013), eq(10).
+      ## Values are based on the defaults of Emcee.
       z <- gamma0 * rnorm(length(active.idx), 1, 1e-5)
       prop <- active + z * (partner.1 - partner.2)
 
