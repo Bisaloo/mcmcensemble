@@ -187,15 +187,15 @@ limits for the chains.</p>
 <span><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;      Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a -3.9285 10.591   0.1934         0.6925</span></span>
-<span><span class="co">#&gt; b -0.8462  7.234   0.1321         0.6588</span></span>
+<span><span class="co">#&gt;      Mean    SD Naive SE Time-series SE</span></span>
+<span><span class="co">#&gt; a -0.8432 8.030  0.14661         0.6125</span></span>
+<span><span class="co">#&gt; b  1.0343 2.286  0.04174         0.1609</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     2.5%     25%    50%   75%  97.5%</span></span>
-<span><span class="co">#&gt; a -30.14 -8.0312 -1.855 3.464 11.283</span></span>
-<span><span class="co">#&gt; b -24.50 -0.3771  1.615 2.718  4.621</span></span></code></pre></div>
+<span><span class="co">#&gt;      2.5%     25%     50%   75%  97.5%</span></span>
+<span><span class="co">#&gt; a -14.461 -7.3898 -0.5432 5.457 13.256</span></span>
+<span><span class="co">#&gt; b  -4.347 -0.2204  1.5516 2.673  4.224</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
@@ -243,14 +243,14 @@ the function <code>f</code> you provide.</p>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a 0.4793 0.2777 0.005071        0.02978</span></span>
-<span><span class="co">#&gt; b 0.6765 0.2537 0.004633        0.02676</span></span>
+<span><span class="co">#&gt; a 0.4952 0.2811 0.005132        0.03139</span></span>
+<span><span class="co">#&gt; b 0.6649 0.2446 0.004466        0.02832</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span></span>
-<span><span class="co">#&gt; a 0.01499 0.2455 0.4815 0.7073 0.9569</span></span>
-<span><span class="co">#&gt; b 0.08775 0.5127 0.7478 0.8829 0.9944</span></span></code></pre></div>
+<span><span class="co">#&gt; a 0.02354 0.2621 0.4926 0.7373 0.9733</span></span>
+<span><span class="co">#&gt; b 0.12695 0.4974 0.7093 0.8689 0.9894</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
@@ -292,14 +292,14 @@ log-posterior and it is not necessary to define it explicitly:</p>
 <span><span class="co">#&gt;    plus standard error of the mean:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     Mean     SD Naive SE Time-series SE</span></span>
-<span><span class="co">#&gt; a 0.4734 0.2966 0.004195        0.02474</span></span>
-<span><span class="co">#&gt; b 0.6475 0.2566 0.003629        0.02071</span></span>
+<span><span class="co">#&gt; a 0.4909 0.2908 0.004113        0.02486</span></span>
+<span><span class="co">#&gt; b 0.7059 0.2435 0.003443        0.02487</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;      2.5%    25%    50%    75%  97.5%</span></span>
-<span><span class="co">#&gt; a 0.01453 0.2200 0.4412 0.7289 0.9801</span></span>
-<span><span class="co">#&gt; b 0.08452 0.4832 0.7014 0.8614 0.9866</span></span></code></pre></div>
+<span><span class="co">#&gt; a 0.03674 0.2337 0.4820 0.7462 0.9744</span></span>
+<span><span class="co">#&gt; b 0.12457 0.5699 0.7736 0.9042 0.9922</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
 <p><img src="faq_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
