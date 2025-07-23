@@ -136,31 +136,72 @@ test_that("named arguments", {
 })
 
 test_that("minimal number of walkers: stretch", {
-  for (d in 1:2) {
-    expect_error(
-      MCMCEnsemble(
-        p.log,
-        inits = unif_inits,
-        n.walkers = d,
-        method = "stretch"
-      ),
-      "min(3, d+1)",
-      fixed = TRUE
-    )
+  for(dims in 1:3) {
+    for(n.walkers in 1:5){
+      inits <- as.data.frame(matrix(
+        runif(n.walkers*dims, -1, 1),
+        ncol = dims))
+
+      if(n.walkers < max(3, dims+1)){
+        expect_error(
+          MCMCEnsemble(
+            p.log,
+            inits = inits,
+            n.walkers = n.walkers,
+            max.iter = 20,
+            method = "stretch"
+          ),
+          "max(3, d+1)",
+          fixed = TRUE
+        )
+      } else {
+        expect_no_error(
+          MCMCEnsemble(
+            p.log,
+            inits = inits,
+            n.walkers = n.walkers,
+            max.iter = 20,
+            method = "stretch"
+          )
+        )
+      }
+      
+    }
   }
 })
 
 test_that("minimal number of walkers: differential evolution", {
-  for (d in 1:3) {
-    expect_error(
-      MCMCEnsemble(
-        p.log,
-        inits = unif_inits,
-        n.walkers = d,
-        method = "differential.evolution"
-      ),
-      "min(4, d+2)",
-      fixed = TRUE
-    )
+  for(dims in 1:3) {
+    for(n.walkers in 1:5){
+      inits <- as.data.frame(matrix(
+        runif(n.walkers*dims, -1, 1),
+        ncol = dims))
+
+      if(n.walkers < max(4, dims+2)){
+        expect_error(
+          MCMCEnsemble(
+            p.log,
+            inits = inits,
+            n.walkers = n.walkers,
+            max.iter = 20,
+            method = "differential.evolution"
+          ),
+          "max(4, d+2)",
+          fixed = TRUE
+        )
+      } else {
+        expect_no_error(
+          MCMCEnsemble(
+            p.log,
+            inits = inits,
+            n.walkers = n.walkers,
+            max.iter = 20,
+            method = "differential.evolution"
+          )
+        )
+      }
+      
+    }
   }
 })
+

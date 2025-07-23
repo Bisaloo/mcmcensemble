@@ -10,8 +10,9 @@
 #' @param inits A matrix (or data.frame) containing the starting values for the
 #'   walkers. Each column is a variable to estimate and each row is a walker
 #' @param max.iter maximum number of function evaluations
-#' @param n.walkers number of walkers (ensemble size). An integer greater or
-#'   equal than 2.
+#' @param n.walkers number of walkers (ensemble size). An integer greater than 
+#'  `max(3, d+1)` for stretch move and greater than `max(4, d+2)` for differential
+#'  evolution where `d == ncol(inits)`.
 #' @param method method for proposal generation, either `"stretch"`, or
 #'   `"differential.evolution"`. This argument will be saved as an attribute
 #'   in the output (see examples).
@@ -106,17 +107,17 @@ MCMCEnsemble <- function(
   }
 
   dims <- ncol(inits)
-  if (method == "stretch" & n.walkers < min(3, dims + 1)) {
-    stop(
-      "The number of walkers must be at least `min(3, d+1)` where `d` is the number of parameters.",
-      call. = FALSE
-    )
+  if (method == "stretch" & n.walkers < max(3, dims + 1)) {
+      stop(
+          "The number of walkers must be at least `max(3, d+1)` where `d` is the number of parameters.",
+          call. = FALSE
+      )
   }
-  if (method == "differential.evolution" & min(4, n.walkers < dims + 2)) {
-    stop(
-      "The number of walkers must be at least `min(4, d+2)` where `d` is the number of parameters.",
-      call. = FALSE
-    )
+  if (method == "differential.evolution" &  n.walkers < max(4, dims + 2)) {
+      stop(
+          "The number of walkers must be at least `max(4, d+2)` where `d` is the number of parameters.",
+          call. = FALSE
+      )
   }
 
   if (nrow(inits) != n.walkers) {
