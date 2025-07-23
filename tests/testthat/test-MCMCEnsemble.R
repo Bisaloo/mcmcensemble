@@ -136,13 +136,14 @@ test_that("named arguments", {
 })
 
 test_that("minimal number of walkers: stretch", {
-  for(dims in 1:3) {
-    for(n.walkers in 1:5){
+  for (dims in 1:3) {
+    for (n.walkers in 1:5) {
       inits <- as.data.frame(matrix(
-        runif(n.walkers*dims, -1, 1),
-        ncol = dims))
+        runif(n.walkers * dims, -1, 1),
+        ncol = dims
+      ))
 
-      if(n.walkers < max(3, dims+1)){
+      if (n.walkers < max(3, dims + 1)) {
         expect_error(
           MCMCEnsemble(
             p.log,
@@ -165,19 +166,19 @@ test_that("minimal number of walkers: stretch", {
           )
         )
       }
-      
     }
   }
 })
 
 test_that("minimal number of walkers: differential evolution", {
-  for(dims in 1:3) {
-    for(n.walkers in 1:5){
+  for (dims in 1:3) {
+    for (n.walkers in 1:5) {
       inits <- as.data.frame(matrix(
-        runif(n.walkers*dims, -1, 1),
-        ncol = dims))
+        runif(n.walkers * dims, -1, 1),
+        ncol = dims
+      ))
 
-      if(n.walkers < max(4, dims+2)){
+      if (n.walkers < max(4, dims + 2)) {
         expect_error(
           MCMCEnsemble(
             p.log,
@@ -200,8 +201,6 @@ test_that("minimal number of walkers: differential evolution", {
           )
         )
       }
-      
     }
   }
 })
-
