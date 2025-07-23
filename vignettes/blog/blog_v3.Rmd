@@ -39,8 +39,8 @@ p.log <- function(x) {
 ## set options and starting point
 n_walkers <- 10
 unif_inits <- data.frame(
-  "a" = rnorm(n_walkers, mean = 0, sd = 2),
-  "b" = rnorm(n_walkers, mean = 0, sd = 1)
+  a = rnorm(n_walkers, mean = 0, sd = 2),
+  b = rnorm(n_walkers, mean = 0, sd = 1)
 )
 
 res <- MCMCEnsemble(p.log, inits = unif_inits,
@@ -86,8 +86,8 @@ p.log <- function(x) {
 ## set options and starting point
 n_walkers <- 10
 unif_inits <- data.frame(
-  "a" = runif(n_walkers, 0, 1),
-  "b" = runif(n_walkers, 0, 1)
+  a = runif(n_walkers, 0, 1),
+  b = runif(n_walkers, 0, 1)
 )
 
 ## use stretch move
@@ -141,7 +141,7 @@ longer <- MCMCEnsemble(p.log, inits = last_values,
 # present in `short`
 final <- list(
   samples = array(unlist(lapply(seq_len(dim(longer$samples)[3]), function(i) {
-    cbind(longer$samples[,, i], short$samples[,, i])
+    cbind(longer$samples[, , i], short$samples[, , i])
   })), dim = dim(short$samples) + c(0, dim(longer$samples)[2], 0)),
   log.p = cbind(short$log.p, longer$log.p[, -1])
 )

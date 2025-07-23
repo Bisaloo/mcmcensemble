@@ -1,0 +1,34 @@
+linters: all_linters(
+    packages = c("lifecycle", "lintr"),
+    pipe_consistency_linter(pipe = "|>"),
+    object_name_linter = NULL,
+    implicit_integer_linter = NULL,
+    todo_comment_linter = NULL,
+    library_call_linter = NULL,
+    undesirable_function_linter(
+      modify_defaults(
+        default_undesirable_functions,
+        citEntry = "use the more modern bibentry() function",
+        library = NULL # too many false positive in too many files
+      )
+    ),
+    function_argument_linter = NULL,
+    infix_spaces_linter = NULL,
+    indentation_linter = NULL, # let air handle style
+    one_call_pipe_linter = NULL,
+    object_overwrite_linter = NULL,
+    return_linter = NULL,
+    backport_linter("3.5.0")
+  )
+exclusions: list(
+    "tests/testthat.R" = list(
+      unused_import_linter = Inf
+    ),
+    "tests" = list(
+      undesirable_function_linter = Inf
+    ),
+    "data-raw" = list(
+      missing_package_linter = Inf,
+      namespace_linter = Inf
+    )
+  )
