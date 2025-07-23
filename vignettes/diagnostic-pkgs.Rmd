@@ -125,6 +125,12 @@ mcmc_trace(res_coda$samples)
 Because bayesplot relies on ggplot and its layer system, you can add extra layers as necessary. For example, a common request is how to display the prior and posterior density on the same plot. If your prior is wrapped in a R function, you can then use the `overlay_function()` for this. In our case, we used a uniform distribution as our prior:
 
 ```{r}
-mcmc_dens(res_coda$samples) + 
-  overlay_function(fun = "dunif", geom = "density", color = "red", fill = "darkred", alpha = 0.5)
+mcmc_dens(res_coda$samples) +
+  overlay_function(
+    fun = "dunif",
+    geom = "density",
+    color = "red",
+    fill = "darkred",
+    alpha = 0.5
+  )
 ```
