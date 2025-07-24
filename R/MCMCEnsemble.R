@@ -137,15 +137,10 @@ MCMCEnsemble <- function(
   }
 
   ## add names
-  if (is.null(colnames(inits))) {
-    pnames <- paste0("para_", seq_len(ncol(inits)))
-  } else {
-    pnames <- colnames(inits)
-  }
   dimnames(res$samples) <- list(
     paste0("walker_", seq_len(n.walkers)),
     paste0("generation_", seq_len(ncol(res$samples))),
-    pnames
+    colnames(inits) %||% paste0("para_", seq_len(ncol(inits)))
   )
 
   dimnames(res$log.p) <- list(
