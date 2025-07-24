@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mcmcensemble</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.0</span>
       </span>
     </div>
 
@@ -77,13 +77,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="mcmcensemble-development-version">mcmcensemble (development version)<a class="anchor" aria-label="anchor" href="#mcmcensemble-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="3.2.0" id="mcmcensemble-320">mcmcensemble 3.2.0<a class="anchor" aria-label="anchor" href="#mcmcensemble-320"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-3-2-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-2-0"></a></h3>
 <ul><li>a bug resulting in weak correlation across walkers has been resolved (<a href="https://github.com/Bisaloo/mcmcensemble/issues/9" class="external-link">#9</a>, <a href="https://github.com/scheidan" class="external-link">@scheidan</a>). Runs from this version will therefore produce results different than with previous versions, even for a given seed.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="minor-improvements-development-version">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-development-version"></a></h3>
+<h3 id="minor-improvements-3-2-0">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-3-2-0"></a></h3>
 <p>Two changes ensure chains don’t get stuck in a loop:</p>
 <ul><li>an early parameter check ensures that sufficient walkers are provided (via the <code>n.walkers</code> argument) to ensure ergodicity (<a href="https://github.com/Bisaloo/mcmcensemble/issues/11" class="external-link">#11</a>, <a href="https://github.com/scheidan" class="external-link">@scheidan</a>)</li>
 <li>noise has been added to each step of the differential evolution algorithm to ensure we don’t end up walking on a grid (<a href="https://github.com/Bisaloo/mcmcensemble/issues/12" class="external-link">#12</a>, <a href="https://github.com/scheidan" class="external-link">@scheidan</a>)</li>
