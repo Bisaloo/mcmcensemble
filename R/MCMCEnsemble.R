@@ -52,7 +52,7 @@
 #'
 #' ## use stretch move
 #' res1 <- MCMCEnsemble(p.log, inits = unif_inits,
-#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      max.iter = 150, n.walkers = n_walkers,
 #'                      method = "stretch")
 #'
 #' attr(res1, "ensemble.sampler")
@@ -62,7 +62,7 @@
 #'
 #' ## use stretch move, return samples as 'coda' object
 #' res2 <- MCMCEnsemble(p.log, inits = unif_inits,
-#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      max.iter = 150, n.walkers = n_walkers,
 #'                      method = "stretch", coda = TRUE)
 #'
 #' attr(res2, "ensemble.sampler")
@@ -73,7 +73,7 @@
 #'
 #' ## use different evolution move, return samples as 'coda' object
 #' res3 <- MCMCEnsemble(p.log, inits = unif_inits,
-#'                      max.iter = 300, n.walkers = n_walkers,
+#'                      max.iter = 150, n.walkers = n_walkers,
 #'                      method = "differential.evolution", coda = TRUE)
 #'
 #' attr(res3, "ensemble.sampler")
