@@ -118,8 +118,9 @@ walkers. Each column is a variable to estimate and each row is a walker</p></dd>
 
 
 <dt id="arg-n-walkers">n.walkers<a class="anchor" aria-label="anchor" href="#arg-n-walkers"></a></dt>
-<dd><p>number of walkers (ensemble size). An integer greater or
-equal than 2.</p></dd>
+<dd><p>number of walkers (ensemble size). An integer greater than
+<code>max(3, d+1)</code> for stretch move and greater than <code>max(4, d+2)</code> for
+differential evolution where <code>d == ncol(inits)</code>.</p></dd>
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
