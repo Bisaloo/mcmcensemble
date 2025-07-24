@@ -101,10 +101,7 @@ MCMCEnsemble <- function(
   ...
 ) {
   method <- match.arg(method)
-
-  if (is.data.frame(inits) || inherits(inits, "tbl_df")) {
-    inits <- as.matrix(inits)
-  }
+  inits <- as.matrix(inits)
 
   dims <- ncol(inits)
   if (method == "stretch" && n.walkers < max(3, dims + 1)) {
