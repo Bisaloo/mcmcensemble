@@ -11,8 +11,8 @@
 #'   walkers. Each column is a variable to estimate and each row is a walker
 #' @param max.iter maximum number of function evaluations
 #' @param n.walkers number of walkers (ensemble size). An integer greater than
-#'  `max(3, d+1)` for stretch move and greater than `max(4, d+2)` for differential
-#'  evolution where `d == ncol(inits)`.
+#'  `max(3, d+1)` for stretch move and greater than `max(4, d+2)` for
+#'  differential evolution where `d == ncol(inits)`.
 #' @param method method for proposal generation, either `"stretch"`, or
 #'   `"differential.evolution"`. This argument will be saved as an attribute
 #'   in the output (see examples).
