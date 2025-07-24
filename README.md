@@ -109,20 +109,15 @@ summary(res2$samples)
 #>    plus standard error of the mean:
 #> 
 #>      Mean    SD Naive SE Time-series SE
-#> a -1.9746 8.892  0.12575         1.1049
-#> b  0.3599 3.229  0.04566         0.4147
+#> a -1.5494 8.498  0.12018         1.1111
+#> b  0.7705 3.266  0.04619         0.4006
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>      2.5%     25%    50%   75%  97.5%
-#> a -19.563 -8.1257 -1.429 4.862 13.448
-#> b  -8.809 -0.7837  1.199 2.519  4.225
+#>      2.5%     25%     50%   75%  97.5%
+#> a -20.109 -6.9976 -0.7515 4.372 13.670
+#> b  -9.008 -0.1602  1.7794 2.867  4.279
 plot(res2$samples)
-#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
-#> 'length.out'
-
-#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
-#> 'length.out'
 ```
 
 <img src="man/figures/README-example-stretch-1.svg" width="100%" />
@@ -148,20 +143,15 @@ summary(res3$samples)
 #>    plus standard error of the mean:
 #> 
 #>      Mean    SD Naive SE Time-series SE
-#> a -0.7293 9.675  0.13683         0.9148
-#> b  0.1894 4.103  0.05802         0.4690
+#> a -0.5135 7.958  0.11255         0.5623
+#> b  1.1336 2.535  0.03585         0.1869
 #> 
 #> 2. Quantiles for each variable:
 #> 
-#>     2.5%     25%     50%   75% 97.5%
-#> a -23.87 -6.4298 -0.2157 6.038 16.33
-#> b -13.53 -0.8687  1.6170 2.583  4.22
+#>      2.5%       25%     50%   75%  97.5%
+#> a -16.322 -5.964466 -0.2292 5.587 13.379
+#> b  -5.544  0.002173  1.7944 2.819  4.353
 plot(res3$samples)
-#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
-#> 'length.out'
-
-#> Warning in rep(col, length = nchain(x)): partial argument match of 'length' to
-#> 'length.out'
 ```
 
 <img src="man/figures/README-example-de-1.svg" width="100%" />
@@ -219,7 +209,8 @@ in other languages:
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-Goodman2010" class="csl-entry">
 
