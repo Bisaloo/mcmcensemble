@@ -4,6 +4,13 @@
 
 * a bug resulting in weak correlation across walkers has been resolved (#9, @scheidan). Runs from this version will therefore produce results different than with previous versions, even for a given seed.
 
+## Minor improvements
+
+Two changes ensure chains don't get stuck in a loop:
+
+* an early parameter check ensures that sufficient walkers are provided (via the `n.walkers` argument) to ensure ergodicity (#11, @scheidan)
+* noise has been added to each step of the differential evolution algorithm to ensure we don't end up walking on a grid (#12, @scheidan)
+
 # mcmcensemble 3.1.0
 
 ## Minor improvements
