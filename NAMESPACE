@@ -3,4 +3,5 @@
 export(MCMCEnsemble)
 importFrom(future.apply,future_apply)
 importFrom(progressr,progressor)
+importFrom(stats,rnorm)
 importFrom(stats,runif)

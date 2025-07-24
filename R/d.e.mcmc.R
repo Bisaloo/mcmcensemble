@@ -11,7 +11,7 @@
 #' - `samples[n.walkers,chain.length,n.params]`
 #' - `log.p[n.walkers,chain.length]`
 #'
-#' @importFrom stats runif
+#' @importFrom stats runif rnorm
 #'
 #' @noRd
 #'
