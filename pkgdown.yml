@@ -5,7 +5,7 @@ articles:
   blog/blog_v3: blog/blog_v3.html
   diagnostic-pkgs: diagnostic-pkgs.html
   faq: faq.html
-last_built: 2025-07-24T08:38Z
+last_built: 2025-07-24T08:47Z
 urls:
   reference: https://bisaloo.github.io/mcmcensemble/reference
   article: https://bisaloo.github.io/mcmcensemble/articles
