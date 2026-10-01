@@ -48,11 +48,12 @@ d.e.mcmc <- function(f, inits, max.iter, n.walkers, ...) {
   log.ps[, 1] <- log.p
   samples[, 1, ] <- ensemble
 
+  gamma0 <- 2.38 / sqrt(2 * n.params)
+
   p()
 
   for (l in seq_len(chain.length)[-1]) {
     ## See Nelson et al. (2013), eq(10).
-    gamma0 <- 2.38 / sqrt(2 * n.params)
     if (l %% 10 == 0) {
       gamma0 <- 1
     }
