@@ -192,12 +192,12 @@ Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ samples: num [1:10, 1:15, 1:2] 0.6008 0.1572 0.0074 0.4664 0.4978 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ samples: num [1:10, 1:15, 1:2] 0.0808 0.8343 0.6008 0.1572 0.0074 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "dimnames")=List of 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ : chr [1:15] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ : chr [1:2] "a" "b"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ log.p  : num [1:10, 1:15] -4.37 -3.59 -3.37 -3.91 -3.35 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ log.p  : num [1:10, 1:15] -2.26 -3.94 -4.37 -3.59 -3.37 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ : chr [1:10] "walker_1" "walker_2" "walker_3" "walker_4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ : chr [1:15] "generation_1" "generation_2" "generation_3" "generation_4" ...</span>
@@ -223,15 +223,15 @@ Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1. Empirical mean and standard deviation for each variable,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    plus standard error of the mean:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Mean    SD Naive SE Time-series SE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a 0.3301 0.873  0.07128         0.0929</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b 0.8885 1.005  0.08203         0.1065</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Mean     SD Naive SE Time-series SE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a 0.5292 4.1328  0.33744        0.69340</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 0.7459 0.8183  0.06681        0.09102</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2. Quantiles for each variable:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      2.5%     25%    50%    75% 97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a -1.1457 0.06891 0.4914 0.7823 1.472</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b -0.6121 0.25915 0.6168 1.4792 3.637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      2.5%     25%    50%   75%  97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a -7.3815 -0.7264 0.4641 1.428 11.571</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b -0.8497  0.2568 0.5400 1.201  2.443</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="MCMCEnsemble-1.png" alt="" width="700" height="433"></span>
@@ -257,14 +257,14 @@ Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 <span class="r-out co"><span class="r-pr">#&gt;</span>    plus standard error of the mean:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Mean    SD Naive SE Time-series SE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a 2.020 5.547   0.4529         0.8769</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b 1.036 1.114   0.0910         0.1826</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a 2.113 5.582   0.4558         0.7117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b 1.820 1.695   0.1384         0.2187</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2. Quantiles for each variable:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      2.5%     25%    50%   75%  97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> a -7.3644 -1.2012 0.9448 5.296 12.344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> b -0.8414  0.3566 0.9145 1.709  2.909</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2.5%     25%    50%   75%  97.5%</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a -7.386 -1.9014 0.9248 6.265 14.791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> b -2.550  0.8746 1.8533 3.483  4.191</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res3</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="MCMCEnsemble-2.png" alt="" width="700" height="433"></span>
@@ -283,7 +283,7 @@ Communications in Applied Mathematics and Computational Science, 5(1), 65–80,
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>

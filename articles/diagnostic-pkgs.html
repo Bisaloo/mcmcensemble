@@ -188,7 +188,7 @@ result. This element is of class <code>mcmc.list</code>:</p>
 <span><span class="co">#&gt; b  -6.636 -1.349 1.1132 2.610  4.345</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="700"></p>
 <p>You can also use any other function from the coda package, such as
 <code><a href="https://rdrr.io/pkg/coda/man/effectiveSize.html" class="external-link">effectiveSize()</a></code>:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -203,7 +203,7 @@ available functions.</p>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://mc-stan.org/bayesplot/" class="external-link">bayesplot</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; This is bayesplot version 1.13.0</span></span>
+<span><span class="co">#&gt; This is bayesplot version 1.16.0</span></span>
 <span><span class="co">#&gt; - Online documentation and vignettes at mc-stan.org/bayesplot</span></span>
 <span><span class="co">#&gt; - bayesplot theme set to bayesplot::theme_default()</span></span>
 <span><span class="co">#&gt;    * Does _not_ affect other ggplot2 plots</span></span>
@@ -237,13 +237,13 @@ you specified for the <code>coda</code> argument:</p>
 <span><span class="co"># All the sample points in the parameter space</span></span>
 <span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_nocoda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-scatterplots.html" class="external-link">mcmc_scatter</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-1.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-2.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-3.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-4.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-5.png" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-6.png" width="45%"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-2.png" class="r-plt" alt="" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-3.png" class="r-plt" alt="" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-4.png" class="r-plt" alt="" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-5.png" class="r-plt" alt="" width="45%"><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-10-6.png" class="r-plt" alt="" width="45%"></p>
 <p>However, a limited number of functions still only work with
 <code>coda = TRUE</code>. It is for example the case of
 <code><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace()</a></code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/bayesplot/reference/MCMC-traces.html" class="external-link">mcmc_trace</a></span><span class="op">(</span><span class="va">res_coda</span><span class="op">$</span><span class="va">samples</span><span class="op">)</span></span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="700"></p>
 <p>Because bayesplot relies on ggplot and its layer system, you can add
 extra layers as necessary. For example, a common request is how to
 display the prior and posterior density on the same plot. If your prior
@@ -263,7 +263,7 @@ distribution as our prior:</p>
 <span><span class="co">#&gt; Computation failed in `stat_function()`.</span></span>
 <span><span class="co">#&gt; Caused by error in `fun()`:</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "fun"</span></span></code></pre></div>
-<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
+<p><img src="diagnostic-pkgs_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="700"></p>
 </div>
   </div>
 
@@ -282,7 +282,7 @@ distribution as our prior:</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>
